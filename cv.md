@@ -1,12 +1,10 @@
-# Bin Hu
-
-📍 Los Angeles, CA, USA  
-📧 [hubin@usc.edu](mailto:hubin@usc.edu) | 292419703@qq.com  
-📞 +1 6124563527 | +86 15366075527  
-🔗 Website: [Hbbbba.github.io/Resume](https://Hbbbba.github.io/Resume/)  
-📄 PDF: [Download CV (PDF)](https://Hbbbba.github.io/Resume/cv.pdf)
-
-
+---
+title: Bin Hu
+header-includes:
+  - "Los Angeles, CA, USA"
+  - "\\href{mailto:hubin@usc.edu}{hubin@usc.edu} \\;|\\; 292419703@qq.com"
+  - "+1 6124563527 \\;|\\; +86 15366075527"
+  - "\\href{https://Hbbbba.github.io/Resume/}{Hbbbba.github.io/Resume} \\;|\\; \\href{https://Hbbbba.github.io/Resume/cv.pdf}{cv.pdf}"
 ---
 
 ## Education
