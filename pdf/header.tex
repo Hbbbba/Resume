@@ -1,26 +1,65 @@
 % pdf/header.tex
-\usepackage[margin=0.65in]{geometry}
-\usepackage{microtype}
-\usepackage{parskip}
-\setlength{\parskip}{3pt}
-\setlength{\parindent}{0pt}
+% Goal: compact, clean CV PDF without relying on extra LaTeX packages.
 
-% Compact lists without enumitem
-\usepackage{etoolbox}
+% --- Page layout (no geometry package to avoid missing/sty clash) ---
+\setlength{\oddsidemargin}{-0.15in}
+\setlength{\evensidemargin}{-0.15in}
+\setlength{\textwidth}{6.8in}
+\setlength{\topmargin}{-0.55in}
+\setlength{\textheight}{9.6in}
+
+% --- Paragraph spacing ---
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+% --- Compact lists (no enumitem) ---
 \makeatletter
-\pretocmd{\itemize}{\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}\setlength{\parsep}{0pt}}{}{}
-\pretocmd{\enumerate}{\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}\setlength{\parsep}{0pt}}{}{}
+% Reduce spacing in itemize/enumerate environments
+\let\olditemize\itemize
+\let\endolditemize\enditemize
+\renewenvironment{itemize}{
+  \olditemize
+  \setlength{\itemsep}{1pt}
+  \setlength{\parsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\topsep}{2pt}
+}{
+  \endolditemize
+}
+
+\let\oldenumerate\enumerate
+\let\endoldenumerate\endenumerate
+\renewenvironment{enumerate}{
+  \oldenumerate
+  \setlength{\itemsep}{1pt}
+  \setlength{\parsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\topsep}{2pt}
+}{
+  \endoldenumerate
+}
 \makeatother
 
+% --- Compact section headings (no titlesec) ---
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{0pt}%
+  {-0.8ex plus -0.2ex minus -0.2ex}%
+  {0.35ex plus 0.1ex}%
+  {\normalfont\large\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{0pt}%
+  {-0.6ex plus -0.2ex minus -0.2ex}%
+  {0.25ex plus 0.1ex}%
+  {\normalfont\normalsize\bfseries}}
+\makeatother
 
-\usepackage{titlesec}
-\titlespacing*{\section}{0pt}{6pt}{3pt}
-\titlespacing*{\subsection}{0pt}{5pt}{2pt}
-\titleformat{\section}{\large\bfseries}{}{0pt}{}
-\titleformat{\subsection}{\normalsize\bfseries}{}{0pt}{}
+% --- Make links look clean if hyperref is present (Pandoc often adds it) ---
+\AtBeginDocument{%
+  \providecommand{\hypersetup}[1]{}%
+  \hypersetup{hidelinks}%
+}
 
-% 更紧凑的列表编号/间距
-\renewcommand{\labelitemi}{--}
-
-% 简历的标题样式
-\usepackage[hidelinks]{hyperref}
+% --- Small tweaks for nicer look ---
+% Slightly tighter line breaking
+\sloppy
+\widowpenalty=10000
+\clubpenalty=10000
