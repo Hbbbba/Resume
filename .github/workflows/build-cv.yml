@@ -14,11 +14,25 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Create Topbar HTML
+        run: |
+          cat > topbar.html << 'EOF'
+          <div class="topbar">
+            <div><strong>CV</strong></div>
+            <div>
+              <a class="btn" href="cv.pdf" download>Download PDF</a>
+            </div>
+          </div>
+          <hr/>
+          EOF
+
 
       # 1) Build index.html from cv.md
       - name: Build HTML with Pandoc
@@ -30,6 +44,7 @@ jobs:
             --standalone
             --metadata title="Bin Hu | CV"
             --css style.css
+            --include-before-body=topbar.html
 
       # 2) Add a simple CSS for better look
       - name: Create CSS
@@ -45,23 +60,6 @@ jobs:
           EOF
 
       # 3) Wrap HTML with a top bar containing "Download PDF" button
-      - name: Inject Download Button
-        run: |
-          python3 - << 'PY'
-          from pathlib import Path
-          html = Path("index.html").read_text(encoding="utf-8")
-          insert = """
-          <div class="topbar">
-            <div><strong>CV</strong></div>
-            <div>
-              <a class="btn" href="cv.pdf" download>Download PDF</a>
-            </div>
-          </div>
-          <hr/>
-          """
-          html = html.replace("<body>", "<body>\n" + insert, 1)
-          Path("index.html").write_text(html, encoding="utf-8")
-          PY
 
       # 4) Convert HTML -> PDF using Playwright (Chromium print)
       - name: Install Playwright
