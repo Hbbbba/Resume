@@ -55,32 +55,30 @@ A Trustworthy and Efficient Automatic Modulation Classification System based on 
 
 ## Publications
 
-1. **Bin Hu**, Zhimeng Yin, Shuai Wang, Zhuqing Xu, Tian He  
-   *SCLoRa: Leveraging Multi-Dimensionality in Decoding Collided LoRa Transmissions*  
-   **IEEE International Conference on Network Protocols (ICNP), 2020**
+1. **Bin Hu**, Feng Qian, Ahmad Hassan, Z. Morley Mao, Zhi-Li Zhang  
+   *Predicting Connectivity and Link Performance in Dynamic LEO Satellite Networks*  
+   **ACM Workshop on Hot Topics in Mobile Computing (HotMobile), 2026. To appear.**
 
-2. Wenwei Li, **Bin Hu**, Xiaolei Zhou, Shuai Wang  
-   *Leveraging Fine-Grained Self-Correlation in Detecting Collided LoRa Transmissions*  
-   **International Conference on Wireless Algorithms, Systems, and Applications (WASA), 2021**
-
-3. **Bin Hu**, Xumiao Zhang, Qixin Zhang, Nitin Varyani, Z. Morley Mao, Feng Qian, and Zhi-Li Zhang.
-   *LEO Satellite vs. Cellular Networks: Exploring the Potential for Synergistic Integration*  
-   **ACM CoNEXT Companion, 2023**
-
-4. Jiazhao Wang, Wenchao Jiang, Ruofeng Liu, **Bin Hu**, Demin Gao, Shuai Wang  
-   *NN-Defined Modulator: Reconfigurable and Portable Software Modulator on IoT Gateways*  
-   **USENIX NSDI, 2024**
-
-5. Kai Sun, **Bin Hu**, Zhimeng Yin, Shuai Wang, Shuai Wang, Zhuqing Xu, Tian He  
+2. Kai Sun, **Bin Hu**, Zhimeng Yin, Shuai Wang, Shuai Wang, Zhuqing Xu, Tian He  
    *Joint Multidimensional Features for LoRa Reception in Burst Traffic*  
    **Computer Networks, Volume 270, 111476 (2025).**  
    DOI: 10.1016/j.comnet.2025.111476 :contentReference[oaicite:4]{index=4}
 
-6. **Bin Hu**, Feng Qian, Ahmad Hassan, Z. Morley Mao, Zhi-Li Zhang  
-   *Predicting Connectivity and Link Performance in Dynamic LEO Satellite Networks*  
-   **ACM Workshop on Hot Topics in Mobile Computing (HotMobile), 2026. To appear.**
+3. Jiazhao Wang, Wenchao Jiang, Ruofeng Liu, **Bin Hu**, Demin Gao, Shuai Wang  
+   *NN-Defined Modulator: Reconfigurable and Portable Software Modulator on IoT Gateways*  
+   **USENIX NSDI, 2024**
 
+4. **Bin Hu**, Xumiao Zhang, Qixin Zhang, Nitin Varyani, Z. Morley Mao, Feng Qian, and Zhi-Li Zhang.
+   *LEO Satellite vs. Cellular Networks: Exploring the Potential for Synergistic Integration*  
+   **ACM CoNEXT Companion, 2023**
 
+5. Wenwei Li, **Bin Hu**, Xiaolei Zhou, Shuai Wang  
+   *Leveraging Fine-Grained Self-Correlation in Detecting Collided LoRa Transmissions*  
+   **International Conference on Wireless Algorithms, Systems, and Applications (WASA), 2021**
+
+6. **Bin Hu**, Zhimeng Yin, Shuai Wang, Zhuqing Xu, Tian He  
+   *SCLoRa: Leveraging Multi-Dimensionality in Decoding Collided LoRa Transmissions*  
+   **IEEE International Conference on Network Protocols (ICNP), 2020**
 
 ---
 
