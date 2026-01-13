@@ -25,17 +25,16 @@ education:
     degree: Ph.D. in Electrical and Computer Engineering
     department: Ming Hsieh Department of Electrical and Computer Engineering
     period: Aug. 2023 – Present
-    details:
-      - "Research Area: Computer Networks, Satellite Networks, Video, Machine Learning"
-      - "Advisor: Prof. Feng Qian"
+    Research Area: Computer Networks, Satellite Networks, Video, Machine Learning"
+    Advisor: Prof. Feng Qian"
 
   - institution: University of Minnesota, Twin Cities
     location: Minneapolis, MN, USA
     degree: Ph.D. in Computer Science and Engineering
+    department: Department of Computer Science and Engineering
     period: Aug. 2022 – Aug. 2023
-    details:
-      - "Research Area: Computer Networks, Wireless Communication"
-      - "Advisor: Prof. Feng Qian"
+    Research Area: Computer Networks, Wireless Communication"
+    Advisor: Prof. Feng Qian"
 
   - institution: Southeast University (SEU)
     location: Nanjing, China
@@ -43,19 +42,16 @@ education:
     department: School of Computer Science and Engineering
     period: Sept. 2019 – Jun. 2022
     #gpa: "83.87 / 100"
-    details:
-      - "Research Area: Internet of Things, Wireless Communication"
-      - "Advisor: Prof. Tian He"
+    Research Area: Internet of Things, Wireless Communication"
+    Advisor: Prof. Tian He"
 
   - institution: Singapore University of Technology and Design (SUTD)
     location: Singapore
     degree: Exchange Student / Research Assistant
     department: Pillar of Information Systems Technology and Design
     period: May 2021 – May 2022
-    advisor: Prof. Wenchao Jiang
-    details:
-        - "Research Area: Automatic Modulation Classification, Explainable AI"
-        - "Advisor: Prof. Wenchao Jiang"
+    Research Area: Automatic Modulation Classification, Explainable AI"
+    Advisor: Prof. Wenchao Jiang"
 
 
   - institution: Southeast University (SEU)
