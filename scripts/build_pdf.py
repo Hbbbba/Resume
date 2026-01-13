@@ -120,6 +120,8 @@ def latex_doc(data: dict) -> str:
             dept = latex_escape(e.get("department", ""))
             loc = latex_escape(e.get("location", ""))
             gpa = latex_escape(e.get("gpa", ""))
+            area = latex_escape(e.get("Research Area", ""))
+            advisor = latex_escape(e.get("Advisor", ""))
 
             # 第一行：学校 + 右侧时间
             parts.append(r"\textbf{" + inst + r"}" + (r"\hfill " + period if period else "") + r"\\[-2pt]")
@@ -138,13 +140,14 @@ def latex_doc(data: dict) -> str:
             if adv:
                 parts.append(r"\textbf{Advisor:} " + latex_escape(adv) + r"\\[-2pt]")
 
-            proj = e.get("project", {}) or {}
-            if proj.get("title", ""):
-                parts.append(r"\textbf{Project:} " + latex_escape(proj["title"]) + r"\\[-2pt]")
-
-            details = e.get("details", []) or []
-            if details:
-                parts.append(itemize(details))
+            # proj = e.get("project", {}) or {}
+            # if proj.get("title", ""):
+            #     parts.append(r"\textbf{Project:} " + latex_escape(proj["title"]) + r"\\[-2pt]")
+            
+            if area:
+                parts.append(r"\textbf{Research Area:} " + area + r"\\[-2pt]")
+            if advisor:
+                parts.append(r"\textbf{Advisor:} " + advisor + r"\\[-2pt]")
 
             # 原来是 \vspace{4pt}，这里改小（或者直接删掉这一行）
             parts.append(r"\vspace{2pt}")

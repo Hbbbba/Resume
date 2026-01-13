@@ -115,13 +115,9 @@ def render_education(data: dict) -> str:
         degree = h(ed.get("degree", ""))
         dept = h(ed.get("department", ""))
         period = h(ed.get("period", ""))
-        gpa = h(ed.get("gpa", ""))
-
-        details = ed.get("details", []) or []
-        advisor = h(ed.get("advisor", ""))  # for SUTD entry
-
-        project = ed.get("project", {}) or {}
-        project_title = h(project.get("title", ""))
+        #gpa = h(ed.get("gpa", ""))
+        area = h(ed.get("Research Area", ""))
+        advisor = h(ed.get("Advisor", ""))
 
         out.append('<div class="item">')
         out.append(f'<div class="row"><div class="title">{inst}</div><div class="period">{period}</div></div>')
@@ -134,20 +130,19 @@ def render_education(data: dict) -> str:
             subparts.append(f'<div class="small">{loc}</div>')
         #if gpa:
         #    subparts.append(f'<div class="small">GPA: {gpa}</div>')
-        if advisor:
-            subparts.append(f"<div><b>Advisor:</b> {advisor}</div>")
+        # if advisor:
+        #     subparts.append(f"<div><b>Advisor:</b> {advisor}</div>")
 
         if subparts:
             out.append(f'<div class="sub">{"".join(subparts)}</div>')
 
-        if details:
-            out.append("<ul>")
-            for d in details:
-                out.append(f"<li>{h(d)}</li>")
-            out.append("</ul>")
+        if area:
+            out.append(f"<div><b>Research Area:</b> {area}</div>")
+        if advisor:
+            out.append(f"<div><b>Advisor:</b> {advisor}</div>")
 
-        if project_title:
-            out.append("<div class='sub'><b>Project:</b> " + project_title + "</div>")
+        # if project_title:
+        #     out.append("<div class='sub'><b>Project:</b> " + project_title + "</div>")
 
         out.append("</div>")
     out.append("</div>")
