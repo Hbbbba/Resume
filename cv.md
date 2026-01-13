@@ -1,10 +1,12 @@
----
-title: Bin Hu
-header-includes:
-  - "Los Angeles, CA, USA"
-  - "\\href{mailto:hubin@usc.edu}{hubin@usc.edu} \\;|\\; 292419703@qq.com"
-  - "+1 6124563527 \\;|\\; +86 15366075527"
-  - "\\href{https://Hbbbba.github.io/Resume/}{Hbbbba.github.io/Resume} \\;|\\; \\href{https://Hbbbba.github.io/Resume/cv.pdf}{cv.pdf}"
+# Bin Hu
+
+📍 Los Angeles, CA, USA  
+📧 [hubin@usc.edu](mailto:hubin@usc.edu) | 292419703@qq.com  
+📞 +1 6124563527 | +86 15366075527  
+🔗 Website: [Hbbbba.github.io/Resume](https://Hbbbba.github.io/Resume/)  
+📄 PDF: [Download CV (PDF)](https://Hbbbba.github.io/Resume/cv.pdf)
+
+
 ---
 
 ## Education
@@ -29,7 +31,7 @@ Aug. 2022 – Aug. 2023
 ### Southeast University (SEU), Nanjing, China
 **M.Sc. in Computer Science and Engineering**  
 Sept. 2019 – Jun. 2022  
-GPA: 83.87 / 100  
+# GPA: 83.87 / 100  
 **Research Area:** Internet of Things, Wireless Communication  
 **Advisor:** Prof. Tian He
 
@@ -38,7 +40,7 @@ GPA: 83.87 / 100
 ### Southeast University (SEU), Nanjing, China
 **B.Eng. in Computer Science and Engineering**  
 Sept. 2015 – Jun. 2019  
-GPA: 3.5 / 4.8 (84.8 / 100)
+# GPA: 3.5 / 4.8 (84.8 / 100)
 
 ---
 
