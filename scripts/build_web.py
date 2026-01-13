@@ -132,8 +132,8 @@ def render_education(data: dict) -> str:
             subparts.append(f"<div>{dept}</div>")
         if loc:
             subparts.append(f'<div class="small">{loc}</div>')
-        if gpa:
-            subparts.append(f'<div class="small">GPA: {gpa}</div>')
+        #if gpa:
+        #    subparts.append(f'<div class="small">GPA: {gpa}</div>')
         if advisor:
             subparts.append(f"<div><b>Advisor:</b> {advisor}</div>")
 
