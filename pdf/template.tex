@@ -1,6 +1,6 @@
 \documentclass[$fontsize$,letterpaper]{article}
 
-% --- Compact page (no extra packages) ---
+% Layout
 \setlength{\oddsidemargin}{-0.10in}
 \setlength{\evensidemargin}{-0.10in}
 \setlength{\textwidth}{6.7in}
@@ -9,17 +9,16 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{2.5pt}
 
-% --- Section style: ALL CAPS like the sample ---
+% Section titles: ALL CAPS
 \makeatletter
 \renewcommand\thesection{}
-\renewcommand\thesubsection{}
 \renewcommand\section{\@startsection{section}{1}{0pt}%
   {-0.9ex plus -0.2ex minus -0.2ex}%
   {0.35ex plus 0.1ex}%
   {\normalfont\bfseries\MakeUppercase}}
 \makeatother
 
-% --- Compact lists (no enumitem) ---
+% Compact lists
 \makeatletter
 \let\olditemize\itemize
 \let\endolditemize\enditemize
@@ -34,7 +33,6 @@
 }
 \makeatother
 
-% --- Hyperlinks if present (won't error if absent) ---
 \AtBeginDocument{%
   \providecommand{\hypersetup}[1]{}%
   \hypersetup{hidelinks}%
@@ -42,16 +40,15 @@
 
 \begin{document}
 
-% ===== Header (centered) =====
+% Centered header (title + first block from markdown)
 \begin{center}
 {\LARGE\bfseries $title$}\par
 \vspace{4pt}
 $for(header-includes)$
-$header-includes$
+$header-includes$\par
 $endfor$
 \end{center}
 
-% Left-aligned separator (like your PDF)
 \vspace{2pt}
 \hrule
 \vspace{10pt}

@@ -32,17 +32,20 @@ jobs:
             --css assets/style.css
 
       # ---------- PDF (Compact, LaTeX-based) ----------
-      - name: Build Compact PDF CV
+      - name: Build PDF source (cv_pdf.md)
+        run: python3 pdf/clean_for_pdf.py
+
+      - name: Build Compact PDF (from cv_pdf.md)
         uses: docker://pandoc/latex:latest
         with:
           args: >
-            cv.md
+            cv_pdf.md
             -o cv.pdf
             --pdf-engine=xelatex
-            -V documentclass=article
+            --template=pdf/template.tex
             -V fontsize=10pt
             -V linestretch=1.03
-            -H pdf/header.tex
+
 
       # ---------- Prepare Pages ----------
       - name: Prepare site
