@@ -128,26 +128,26 @@ def latex_doc(data: dict) -> str:
 
             # 下面几行：用 \\[-2pt] 把行距压紧一点
             if degree:
-                parts.append(r"\textbf{" + degree + r"}\\[-2pt]")
+                parts.append(r"\textbf{" + degree + r"}\\[-0.5pt]")
             if dept:
-                parts.append(dept + r"\\[-2pt]")
+                parts.append(dept + r"\\[-0.5pt]")
             if loc:
-                parts.append(loc + r"\\[-2pt]")
+                parts.append(loc + r"\\[-0.5pt]")
             #if gpa:
             #    parts.append(r"GPA: " + gpa + r"\\[-2pt]")
 
-            adv = e.get("advisor", "")
-            if adv:
-                parts.append(r"\textbf{Advisor:} " + latex_escape(adv) + r"\\[-2pt]")
+            # adv = e.get("advisor", "")
+            # if adv:
+            #     parts.append(r"\textbf{Advisor:} " + latex_escape(adv) + r"\\[-2pt]")
 
             # proj = e.get("project", {}) or {}
             # if proj.get("title", ""):
             #     parts.append(r"\textbf{Project:} " + latex_escape(proj["title"]) + r"\\[-2pt]")
             
             if area:
-                parts.append(r"\textbf{Research Area:} " + area + r"\\[-2pt]")
+                parts.append(r"\textbf{Research Area:} " + area + r"\\[-0.5pt]")
             if advisor:
-                parts.append(r"\textbf{Advisor:} " + advisor + r"\\[-2pt]")
+                parts.append(r"\textbf{Advisor:} " + advisor + r"\\[-0.5pt]")
 
             # 原来是 \vspace{4pt}，这里改小（或者直接删掉这一行）
             parts.append(r"\vspace{4pt}")
