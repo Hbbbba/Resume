@@ -24,12 +24,13 @@ jobs:
       - name: Build HTML CV
         uses: docker://pandoc/latex:latest
         with:
-          args: |
+          args: >
             cv.md
             -o index.html
             --standalone
-            --metadata title="Bin Hu | Resume"
-            --css assets/style.css
+            --metadata=title:"Bin Hu | Resume"
+            --css=assets/style.css
+
 
       # Build PDF source from cv.md (for PDF-only formatting)
       - name: Build PDF source (cv_pdf.md)
