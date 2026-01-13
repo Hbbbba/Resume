@@ -1,4 +1,4 @@
-name: Build and Deploy CV (HTML + PDF)
+name: Build Resume (HTML + Compact PDF)
 
 on:
   push:
@@ -14,80 +14,43 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create Topbar HTML
-        run: |
-          cat > topbar.html << 'EOF'
-          <div class="topbar">
-            <div><strong>CV</strong></div>
-            <div>
-              <a class="btn" href="cv.pdf" download>Download PDF</a>
-            </div>
-          </div>
-          <hr/>
-          EOF
-
-
-      # 1) Build index.html from cv.md
-      - name: Build HTML with Pandoc
+      # ---------- HTML (for GitHub Pages) ----------
+      - name: Build HTML CV
         uses: docker://pandoc/latex:latest
         with:
           args: >
             cv.md
             -o index.html
             --standalone
-            --metadata title="Bin Hu | CV"
-            --css style.css
-            --include-before-body=topbar.html
+            --metadata title="Bin Hu | Resume"
+            --css assets/style.css
 
-      # 2) Add a simple CSS for better look
-      - name: Create CSS
-        run: |
-          cat > style.css << 'EOF'
-          body { max-width: 900px; margin: 40px auto; padding: 0 16px; font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial; line-height: 1.55; }
-          h1,h2,h3 { margin-top: 1.2em; }
-          hr { margin: 24px 0; }
-          a { text-decoration: none; }
-          .topbar { display:flex; gap:12px; align-items:center; justify-content:space-between; padding: 12px 0; }
-          .btn { display:inline-block; padding:10px 14px; border:1px solid #ccc; border-radius:10px; }
-          .btn:hover { border-color:#888; }
-          EOF
+      # ---------- PDF (Compact, LaTeX-based) ----------
+      - name: Build Compact PDF CV
+        uses: docker://pandoc/latex:latest
+        with:
+          args: >
+            cv.md
+            -o cv.pdf
+            --pdf-engine=xelatex
+            -V geometry:margin=0.7in
+            -V fontsize=10pt
+            -V linestretch=1.05
+            -V documentclass=article
+            -V classoption=letterpaper
 
-      # 3) Wrap HTML with a top bar containing "Download PDF" button
-
-      # 4) Convert HTML -> PDF using Playwright (Chromium print)
-      - name: Install Playwright
-        run: |
-          npm init -y
-          npm i playwright
-          npx playwright install --with-deps chromium
-
-      - name: Print PDF
-        run: |
-          node - << 'JS'
-          const { chromium } = require('playwright');
-          (async () => {
-            const browser = await chromium.launch();
-            const page = await browser.newPage();
-            await page.goto('file://' + process.cwd() + '/index.html', { waitUntil: 'networkidle' });
-            await page.pdf({ path: 'cv.pdf', format: 'Letter', printBackground: true, margin: { top: '0.6in', right: '0.6in', bottom: '0.6in', left: '0.6in' } });
-            await browser.close();
-          })();
-          JS
-
-      # 5) Prepare site/ folder for GitHub Pages
+      # ---------- Prepare Pages ----------
       - name: Prepare site
         run: |
           mkdir -p site
           mv index.html site/index.html
           mv cv.pdf site/cv.pdf
-          mv style.css site/style.css
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
