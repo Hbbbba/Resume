@@ -1,0 +1,28 @@
+name: Build CV PDF
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Academic CV PDF
+        uses: docker://pandoc/latex
+        with:
+          args: academic_cv.md -o academic_cv.pdf --pdf-engine=xelatex
+
+      - name: Build Industry CV PDF
+        uses: docker://pandoc/latex
+        with:
+          args: industry_cv.md -o industry_cv.pdf --pdf-engine=xelatex
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cv-pdfs
+          path: |
+            academic_cv.pdf
+            industry_cv.pdf
