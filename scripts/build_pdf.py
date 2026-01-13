@@ -268,9 +268,20 @@ def latex_doc(data: dict) -> str:
     body = "\n".join(parts)
 
     tex = rf"""
-\documentclass[10pt,letterpaper]{{article}}
-\usepackage[margin=0.75in]{{geometry}}
-\usepackage[hidelinks]{{hyperref}}
+\documentclass[10pt,letterpaper]{article}
+
+\usepackage[margin=0.75in]{geometry}
+\usepackage[hidelinks]{hyperref}
+
+% ===== Font: Times New Roman =====
+\usepackage{fontspec}
+\setmainfont{Times New Roman}[
+  Ligatures=TeX,
+  BoldFont = Times New Roman Bold,
+  ItalicFont = Times New Roman Italic,
+  BoldItalicFont = Times New Roman Bold Italic
+]
+
 
 \setlength{{\parindent}}{{0pt}}
 \setlength{{\parskip}}{{3pt}}
