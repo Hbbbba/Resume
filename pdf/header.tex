@@ -5,9 +5,13 @@
 \setlength{\parskip}{3pt}
 \setlength{\parindent}{0pt}
 
-\usepackage{enumitem}
-\setlist[itemize]{nosep,leftmargin=1.2em}
-\setlist[enumerate]{nosep,leftmargin=1.2em}
+% Compact lists without enumitem
+\usepackage{etoolbox}
+\makeatletter
+\pretocmd{\itemize}{\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}\setlength{\parsep}{0pt}}{}{}
+\pretocmd{\enumerate}{\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}\setlength{\parsep}{0pt}}{}{}
+\makeatother
+
 
 \usepackage{titlesec}
 \titlespacing*{\section}{0pt}{6pt}{3pt}
