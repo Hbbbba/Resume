@@ -267,7 +267,11 @@ def latex_doc(data: dict) -> str:
 
 % ===== Font: Times New Roman (XeLaTeX) =====
 \usepackage{fontspec}
-\setmainfont{Times New Roman}
+\IfFontExistsTF{Times New Roman}{
+  \setmainfont{Times New Roman}
+}{
+  \setmainfont{TeX Gyre Termes}
+}
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{3pt}
