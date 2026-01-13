@@ -1,8 +1,18 @@
-name: Build CV PDF
+name: Build and Deploy CV (HTML + PDF)
 
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -10,19 +20,87 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build Academic CV PDF
-        uses: docker://pandoc/latex
+      # 1) Build index.html from cv.md
+      - name: Build HTML with Pandoc
+        uses: docker://pandoc/latex:latest
         with:
-          args: academic_cv.md -o academic_cv.pdf --pdf-engine=xelatex
+          args: >
+            cv.md
+            -o index.html
+            --standalone
+            --metadata title="Bin Hu | CV"
+            --css style.css
 
-      - name: Build Industry CV PDF
-        uses: docker://pandoc/latex
-        with:
-          args: industry_cv.md -o industry_cv.pdf --pdf-engine=xelatex
+      # 2) Add a simple CSS for better look
+      - name: Create CSS
+        run: |
+          cat > style.css << 'EOF'
+          body { max-width: 900px; margin: 40px auto; padding: 0 16px; font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial; line-height: 1.55; }
+          h1,h2,h3 { margin-top: 1.2em; }
+          hr { margin: 24px 0; }
+          a { text-decoration: none; }
+          .topbar { display:flex; gap:12px; align-items:center; justify-content:space-between; padding: 12px 0; }
+          .btn { display:inline-block; padding:10px 14px; border:1px solid #ccc; border-radius:10px; }
+          .btn:hover { border-color:#888; }
+          EOF
 
-      - uses: actions/upload-artifact@v4
+      # 3) Wrap HTML with a top bar containing "Download PDF" button
+      - name: Inject Download Button
+        run: |
+          python3 - << 'PY'
+          from pathlib import Path
+          html = Path("index.html").read_text(encoding="utf-8")
+          insert = """
+          <div class="topbar">
+            <div><strong>CV</strong></div>
+            <div>
+              <a class="btn" href="cv.pdf" download>Download PDF</a>
+            </div>
+          </div>
+          <hr/>
+          """
+          html = html.replace("<body>", "<body>\n" + insert, 1)
+          Path("index.html").write_text(html, encoding="utf-8")
+          PY
+
+      # 4) Convert HTML -> PDF using Playwright (Chromium print)
+      - name: Install Playwright
+        run: |
+          npm init -y
+          npm i playwright
+          npx playwright install --with-deps chromium
+
+      - name: Print PDF
+        run: |
+          node - << 'JS'
+          const { chromium } = require('playwright');
+          (async () => {
+            const browser = await chromium.launch();
+            const page = await browser.newPage();
+            await page.goto('file://' + process.cwd() + '/index.html', { waitUntil: 'networkidle' });
+            await page.pdf({ path: 'cv.pdf', format: 'Letter', printBackground: true, margin: { top: '0.6in', right: '0.6in', bottom: '0.6in', left: '0.6in' } });
+            await browser.close();
+          })();
+          JS
+
+      # 5) Prepare site/ folder for GitHub Pages
+      - name: Prepare site
+        run: |
+          mkdir -p site
+          mv index.html site/index.html
+          mv cv.pdf site/cv.pdf
+          mv style.css site/style.css
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: cv-pdfs
-          path: |
-            academic_cv.pdf
-            industry_cv.pdf
+          path: site
+
+  deploy:
+    environment:
+      name: github-pages
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
