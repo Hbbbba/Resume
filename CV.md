@@ -63,7 +63,7 @@ A Trustworthy and Efficient Automatic Modulation Classification System based on 
    *Leveraging Fine-Grained Self-Correlation in Detecting Collided LoRa Transmissions*  
    **International Conference on Wireless Algorithms, Systems, and Applications (WASA), 2021**
 
-3. **Bin Hu**, et al.  
+3. **Bin Hu**, Xumiao Zhang, Qixin Zhang, Nitin Varyani, Z. Morley Mao, Feng Qian, and Zhi-Li Zhang.
    *LEO Satellite vs. Cellular Networks: Exploring the Potential for Synergistic Integration*  
    **ACM CoNEXT Companion, 2023**
 
