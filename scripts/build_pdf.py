@@ -68,7 +68,6 @@ def latex_doc(data: dict) -> str:
     phones = data.get("phone", []) or []
     links = data.get("links", {}) or {}
 
-    # Make links clickable in PDF (display text concise)
     website = links.get("website", "")
     pdf_link = links.get("pdf", "")
 
@@ -82,7 +81,6 @@ def latex_doc(data: dict) -> str:
 
     link_parts = []
     if website:
-        # show without scheme if possible
         show = re.sub(r"^https?://", "", website)
         link_parts.append("Website: " + href(website, show))
     if pdf_link:
@@ -101,6 +99,7 @@ def latex_doc(data: dict) -> str:
 
     header = "\n".join([r"\centerline{" + x + r"}" for x in header_lines])
 
+    # ---- build body (same as before) ----
     edu = data.get("education", []) or []
     pubs = data.get("publications", []) or []
     exp = data.get("experience", []) or []
@@ -112,7 +111,6 @@ def latex_doc(data: dict) -> str:
 
     parts: list[str] = []
 
-    # ----- Education
     if edu:
         parts.append(section("Education"))
         for e in edu:
@@ -133,10 +131,10 @@ def latex_doc(data: dict) -> str:
             if gpa:
                 parts.append(r"GPA: " + gpa + r"\\")
 
-            # advisor/project fields
             adv = e.get("advisor", "")
             if adv:
                 parts.append(r"\textbf{Advisor:} " + latex_escape(adv) + r"\\")
+
             proj = e.get("project", {}) or {}
             if proj.get("title", ""):
                 parts.append(r"\textbf{Project:} " + latex_escape(proj["title"]) + r"\\")
@@ -146,7 +144,6 @@ def latex_doc(data: dict) -> str:
                 parts.append(itemize(details))
             parts.append(r"\vspace{4pt}")
 
-    # ----- Publications
     if pubs:
         parts.append(section("Publications"))
         parts.append(r"\begin{enumerate}")
@@ -161,6 +158,7 @@ def latex_doc(data: dict) -> str:
             doi = latex_escape(p.get("doi", "")) if p.get("doi", "") else ""
 
             author_str = ", ".join([bold_my_name(a, "Bin Hu") for a in authors])
+
             meta_bits = []
             if venue:
                 meta_bits.append(venue)
@@ -185,7 +183,6 @@ def latex_doc(data: dict) -> str:
             parts.append(r"\vspace{2pt}")
         parts.append(r"\end{enumerate}")
 
-    # ----- Research & Experience
     if exp:
         parts.append(section("Research & Experience"))
         for e in exp:
@@ -200,7 +197,6 @@ def latex_doc(data: dict) -> str:
                 parts.append(itemize(details))
             parts.append(r"\vspace{4pt}")
 
-    # ----- Funded Projects
     if funded:
         parts.append(section("Funded Projects"))
         items = []
@@ -217,7 +213,6 @@ def latex_doc(data: dict) -> str:
                     items.append(str(sponsor))
         parts.append(itemize(items))
 
-    # ----- Industry
     if industry:
         parts.append(section("Industry Experience"))
         for e in industry:
@@ -232,12 +227,10 @@ def latex_doc(data: dict) -> str:
                 parts.append(itemize(details))
             parts.append(r"\vspace{4pt}")
 
-    # ----- Honors
     if honors:
         parts.append(section("Honors & Awards"))
         parts.append(itemize([str(x) for x in honors]))
 
-    # ----- Skills
     if skills:
         parts.append(section("Skills"))
         for k, arr in skills.items():
@@ -249,7 +242,6 @@ def latex_doc(data: dict) -> str:
             parts.append(itemize([str(v) for v in vals]))
             parts.append(r"\vspace{2pt}")
 
-    # ----- References
     if refs:
         parts.append(section("References"))
         for r in refs:
@@ -267,51 +259,52 @@ def latex_doc(data: dict) -> str:
 
     body = "\n".join(parts)
 
-    tex = rf"""
+    # ===== IMPORTANT: NOT an f-string =====
+    tex_template = r"""
 \documentclass[10pt,letterpaper]{article}
-
 \usepackage[margin=0.75in]{geometry}
 \usepackage[hidelinks]{hyperref}
 
-% ===== Font: Times New Roman =====
+% ===== Font: Times New Roman (XeLaTeX) =====
 \usepackage{fontspec}
-\setmainfont{{Times New Roman}}[
-  Ligatures=TeX,
-  BoldFont = Times New Roman Bold,
-  ItalicFont = Times New Roman Italic,
-  BoldItalicFont = Times New Roman Bold Italic
-]
+\setmainfont{Times New Roman}
 
-
-\setlength{{\parindent}}{{0pt}}
-\setlength{{\parskip}}{{3pt}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
 
 \makeatletter
-\renewcommand\thesection{{}}
-\renewcommand\section{{\@startsection{{section}}{{1}}{{0pt}}%
-  {{-0.8ex}}{{0.6ex}}{{\normalfont\bfseries\MakeUppercase}}}}
+\renewcommand\thesection{}
+\renewcommand\section{\@startsection{section}{1}{0pt}%
+  {-0.8ex}{0.6ex}{\normalfont\bfseries\MakeUppercase}}
 \makeatother
 
 % Compact lists
-\usepackage{{enumitem}}
-\setlist[itemize]{{leftmargin=*, itemsep=1pt, topsep=2pt}}
-\setlist[enumerate]{{leftmargin=*, itemsep=2pt, topsep=2pt}}
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=*, itemsep=1pt, topsep=2pt}
+\setlist[enumerate]{leftmargin=*, itemsep=2pt, topsep=2pt}
 
-\begin{{document}}
+\begin{document}
 
-\begin{{center}}
-{{\LARGE\bfseries {name}}}\par
-\vspace{{4pt}}
-{header}
-\end{{center}}
+\begin{center}
+{\LARGE\bfseries __NAME__}\par
+\vspace{4pt}
+__HEADER__
+\end{center}
 
-\vspace{{10pt}}
+\vspace{10pt}
 
-{body}
+__BODY__
 
-\end{{document}}
-"""
-    return tex.strip() + "\n"
+\end{document}
+""".strip() + "\n"
+
+    return (
+        tex_template
+        .replace("__NAME__", name)
+        .replace("__HEADER__", header)
+        .replace("__BODY__", body)
+    )
+
 
 def run(cmd: list[str], cwd: Path) -> None:
     p = subprocess.run(cmd, cwd=str(cwd), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
