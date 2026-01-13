@@ -1,0 +1,263 @@
+# ======================
+# Basic Information
+# ======================
+name: Bin Hu
+location: Los Angeles, CA, USA
+
+email:
+  - hubin@usc.edu
+  - 292419703@qq.com
+
+phone:
+  - "+1 6124563527"
+  - "+86 15366075527"
+
+links:
+  website: "https://Hbbbba.github.io/Resume/"
+  pdf: "https://Hbbbba.github.io/Resume/cv.pdf"
+
+# ======================
+# Education
+# ======================
+education:
+  - institution: University of Southern California (USC)
+    location: Los Angeles, CA, USA
+    degree: Ph.D. in Electrical and Computer Engineering
+    department: Ming Hsieh Department of Electrical and Computer Engineering
+    period: Aug. 2023 – Present
+    details:
+      - "Research Area: Computer Networks, Wireless Communication, Machine Learning"
+      - "Advisor: Prof. Feng Qian"
+
+  - institution: University of Minnesota, Twin Cities
+    location: Minneapolis, MN, USA
+    degree: Ph.D. in Computer Science and Engineering
+    period: Aug. 2022 – Aug. 2023
+    details:
+      - "Research Area: Computer Networks, Wireless Communication"
+      - "Advisor: Prof. Feng Qian"
+
+  - institution: Southeast University (SEU)
+    location: Nanjing, China
+    degree: M.Sc. in Computer Science and Engineering
+    period: Sept. 2019 – Jun. 2022
+    gpa: "83.87 / 100"
+    details:
+      - "Research Area: Internet of Things, Wireless Communication"
+      - "Advisor: Prof. Tian He"
+
+  - institution: Southeast University (SEU)
+    location: Nanjing, China
+    degree: B.Eng. in Computer Science and Engineering
+    period: Sept. 2015 – Jun. 2019
+    gpa: "3.5 / 4.8 (84.8 / 100)"
+
+  - institution: Singapore University of Technology and Design (SUTD)
+    location: Singapore
+    degree: Exchange Student / Research Assistant
+    department: Pillar of Information Systems Technology and Design
+    period: May 2021 – May 2022
+    advisor: Prof. Wenchao Jiang
+    project:
+      title: "A Trustworthy and Efficient Automatic Modulation Classification System based on Explainable AI"
+
+# ======================
+# Publications
+# ======================
+publications:
+  - title: "Predicting Connectivity and Link Performance in Dynamic LEO Satellite Networks"
+    authors:
+      - Bin Hu
+      - Feng Qian
+      - Ahmad Hassan
+      - Z. Morley Mao
+      - Zhi-Li Zhang
+    venue: "ACM Workshop on Hot Topics in Mobile Computing (HotMobile)"
+    year: 2026
+    note: "To appear"
+
+  - title: "Joint Multidimensional Features for LoRa Reception in Burst Traffic"
+    authors:
+      - Kai Sun
+      - Bin Hu
+      - Zhimeng Yin
+      - Shuai Wang
+      - Shuai Wang
+      - Zhuqing Xu
+      - Tian He
+    venue: "Computer Networks"
+    year: 2025
+    volume: "270"
+    pages: "111476"
+    doi: "10.1016/j.comnet.2025.111476"
+
+  - title: "NN-Defined Modulator: Reconfigurable and Portable Software Modulator on IoT Gateways"
+    authors:
+      - Jiazhao Wang
+      - Wenchao Jiang
+      - Ruofeng Liu
+      - Bin Hu
+      - Demin Gao
+      - Shuai Wang
+    venue: "USENIX Symposium on Networked Systems Design and Implementation (NSDI)"
+    year: 2024
+
+  - title: "LEO Satellite vs. Cellular Networks: Exploring the Potential for Synergistic Integration"
+    authors:
+      - Bin Hu
+      - Xumiao Zhang
+      - Qixin Zhang
+      - Nitin Varyani
+      - Z. Morley Mao
+      - Feng Qian
+      - Zhi-Li Zhang
+    venue: "ACM CoNEXT Companion"
+    year: 2023
+
+  - title: "Leveraging Fine-Grained Self-Correlation in Detecting Collided LoRa Transmissions"
+    authors:
+      - Wenwei Li
+      - Bin Hu
+      - Xiaolei Zhou
+      - Shuai Wang
+    venue: "International Conference on Wireless Algorithms, Systems, and Applications (WASA)"
+    year: 2021
+
+  - title: "SCLoRa: Leveraging Multi-Dimensionality in Decoding Collided LoRa Transmissions"
+    authors:
+      - Bin Hu
+      - Zhimeng Yin
+      - Shuai Wang
+      - Zhuqing Xu
+      - Tian He
+    venue: "IEEE International Conference on Network Protocols (ICNP)"
+    year: 2020
+
+# ======================
+# Research & Experience
+# ======================
+experience:
+  - organization: University of Southern California / University of Minnesota
+    role: Ph.D. Student
+    period: Aug. 2022 – Present
+    details:
+      - "Study network performance and system properties of Starlink LEO satellite networks and 5G networks"
+      - "Focus on cross-layer network design and performance modeling"
+      - "Investigate network dynamics, handovers, and wireless-satellite integration"
+
+  - organization: Singapore University of Technology and Design (SUTD)
+    role: Research Assistant
+    period: May 2021 – Apr. 2022
+    details:
+      - "Worked on Explainable AI (XAI) for Automatic Modulation Classification (AMC)"
+      - "Combined XAI techniques with wireless communication systems"
+      - "Designed interpretable ML models for signal classification"
+
+  - organization: Singapore University of Technology and Design (SUTD)
+    role: Research Assistant
+    period: Jul. 2021
+    details:
+      - "Designed and implemented an AI-based software modulator"
+      - "Achieved low-cost and high-flexibility design"
+      - "Co-first author on a paper under submission to IEEE JSAC"
+
+  - organization: Southeast University (SEU)
+    role: Graduate Student Researcher
+    period: Sept. 2019 – Oct. 2020
+    details:
+      - "Studied concurrent communication in LoRa networks"
+      - "Designed and evaluated a multi-dimensional demodulator"
+      - "Published ICNP 2020 paper on collided LoRa transmission decoding"
+      - "Extended work toward a first-author submission to IEEE TMC"
+
+  - organization: Southeast University (SEU)
+    role: Graduate Student Researcher
+    period: Jun. 2021
+    details:
+      - "Focused on collision detection in wireless transmission"
+      - "Implemented fine-grained self-correlation detector"
+      - "Published WASA 2021 paper"
+
+# ======================
+# Funded Projects
+# ======================
+funded_projects:
+  - sponsor: National Key R&D Program of China
+    title: "Gateway-free cross-technology communication among heterogeneous devices"
+
+  - sponsor: National Natural Science Foundation of China (NSFC)
+    projects:
+      - "Large-scale industrial LoRa network concurrent transmission"
+      - "Energy-efficient LPWAN communication mechanisms"
+      - "Direct connection mechanisms for heterogeneous IoT systems"
+
+# ======================
+# Industry Experience
+# ======================
+industry_experience:
+  - organization: Guangzhou Desheng Artificial Intelligence Technology Co., Ltd.
+    role: Algorithm Engineer (Intern)
+    period: Aug. 2018
+    details:
+      - "Developed camera-based assisted driving systems"
+      - "Implemented driver behavior detection and warning algorithms"
+
+# ======================
+# Honors & Awards
+# ======================
+honors_awards:
+  - "Second Prize, Academic Scholarship, Southeast University (2019, 2020)"
+  - "National Second Prize, National College Student Smart Car Competition (2018)"
+  - "Provincial Second Prize, National College Student Smart Car Competition (2018)"
+  - "Merit Student of Southeast University (2017)"
+  - "Outstanding Student, School of Computer Science and Engineering, SEU (2016)"
+
+# ======================
+# Skills
+# ======================
+skills:
+  research:
+    - Signal Processing and Digital Communication
+    - Wireless Communication Systems
+    - Explainable Artificial Intelligence (XAI)
+
+  tools_platforms:
+    - GNURadio
+    - MATLAB Toolboxes
+    - Software Defined Radios (SDR)
+
+  programming:
+    - C
+    - C++
+    - Python
+    - Java
+    - MATLAB
+
+# ======================
+# References
+# ======================
+references:
+  - name: Feng Qian
+    title: Associate Professor
+    affiliation: University of Southern California
+    email: fengqian@usc.edu
+
+  - name: Tian He
+    title: Professor, ACM/IEEE Fellow
+    affiliation: Southeast University
+    email: tianhe@seu.edu.cn
+
+  - name: Shuai Wang
+    title: Professor
+    affiliation: Southeast University
+    email: shuaiwang@seu.edu.cn
+
+  - name: Zhimeng Yin
+    title: Assistant Professor
+    affiliation: City University of Hong Kong
+    email: zhimeyin@cityu.edu.hk
+
+  - name: Wenchao Jiang
+    title: Assistant Professor
+    affiliation: Singapore University of Technology and Design
+    email: wenchao_jiang@sutd.edu.sg

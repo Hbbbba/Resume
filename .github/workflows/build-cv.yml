@@ -1,8 +1,8 @@
-name: Build Resume (HTML + PDF)
+name: Build & Deploy Resume (Web + PDF)
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   workflow_dispatch:
 
 permissions:
@@ -17,57 +17,61 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      # HTML for Pages
-      - name: Build HTML CV
-        uses: docker://pandoc/latex:latest
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          args: >
-            cv.md
-            -o index.html
-            --standalone
-            --metadata=title:"Bin Hu | Resume"
-            --css=assets/style.css
+          python-version: "3.11"
 
-
-      # Build PDF source from cv.md (for PDF-only formatting)
-      - name: Build PDF source (cv_pdf.md)
+      - name: Install Python deps
         run: |
-          python3 pdf/clean_for_pdf.py
-          test -f cv_pdf.md
+          python -m pip install --upgrade pip
+          pip install pyyaml
 
-      # PDF (compact, template-controlled)
-      - name: Build Compact PDF (from cv_pdf.md)
-        uses: docker://pandoc/latex:latest
-        with:
-          args: >
-            cv_pdf.md
-            -o=cv.pdf
-            --pdf-engine=xelatex
-            --template=pdf/template.tex
-            -V fontsize=10pt
-            -V linestretch=1.03
-
-
-      # Prepare Pages artifact
-      - name: Prepare site
+      # Install XeLaTeX for PDF generation
+      - name: Install TeX (XeLaTeX)
         run: |
-          mkdir -p site
-          mv index.html site/index.html
-          mv cv.pdf site/cv.pdf
+          sudo apt-get update
+          sudo apt-get install -y \
+            texlive-xetex \
+            texlive-fonts-recommended \
+            texlive-latex-extra
 
+      # Optional: show repo files for debugging if anything missing
+      - name: Show repo files
+        run: |
+          echo "Repo root:"
+          ls -lah
+          echo "scripts/:"
+          ls -lah scripts || true
+
+      - name: Build Web (site/index.html)
+        run: |
+          python scripts/build_web.py
+          test -f site/index.html
+          echo "Generated site/index.html"
+
+      - name: Build PDF (site/cv.pdf)
+        run: |
+          python scripts/build_pdf.py
+          test -f site/cv.pdf
+          echo "Generated site/cv.pdf"
+
+      # Upload site/ as Pages artifact
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: site
 
   deploy:
-    environment:
-      name: github-pages
     runs-on: ubuntu-latest
     needs: build
+    environment:
+      name: github-pages
     steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
