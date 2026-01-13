@@ -42,8 +42,7 @@ jobs:
             -V geometry:margin=0.7in
             -V fontsize=10pt
             -V linestretch=1.05
-            -V documentclass=article
-            -V classoption=letterpaper
+            -H pdf/header.tex
 
       # ---------- Prepare Pages ----------
       - name: Prepare site
