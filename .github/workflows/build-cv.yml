@@ -39,9 +39,9 @@ jobs:
             cv.md
             -o cv.pdf
             --pdf-engine=xelatex
-            -V geometry:margin=0.7in
+            -V documentclass=article
             -V fontsize=10pt
-            -V linestretch=1.05
+            -V linestretch=1.03
             -H pdf/header.tex
 
       # ---------- Prepare Pages ----------
