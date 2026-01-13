@@ -33,7 +33,10 @@ jobs:
 
       # ---------- PDF (Compact, LaTeX-based) ----------
       - name: Build PDF source (cv_pdf.md)
-        run: python3 pdf/clean_for_pdf.py
+        run: |
+          python3 pdf/clean_for_pdf.py
+          test -f cv_pdf.md
+          echo "Found cv_pdf.md"
 
       - name: Build Compact PDF (from cv_pdf.md)
         uses: docker://pandoc/latex:latest
