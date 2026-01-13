@@ -42,13 +42,14 @@ jobs:
       - name: Build Compact PDF (from cv_pdf.md)
         uses: docker://pandoc/latex:latest
         with:
-          args: |
+          args: >
             cv_pdf.md
-            -o cv.pdf
+            -o=cv.pdf
             --pdf-engine=xelatex
             --template=pdf/template.tex
             -V fontsize=10pt
             -V linestretch=1.03
+
 
       # Prepare Pages artifact
       - name: Prepare site
