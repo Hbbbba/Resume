@@ -1,4 +1,4 @@
-name: Build Resume (HTML + Compact PDF)
+name: Build Resume (HTML + PDF)
 
 on:
   push:
@@ -20,25 +20,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # ---------- HTML (for GitHub Pages) ----------
+      # HTML for Pages
       - name: Build HTML CV
         uses: docker://pandoc/latex:latest
         with:
-          args: >
+          args: |
             cv.md
             -o index.html
             --standalone
             --metadata title="Bin Hu | Resume"
             --css assets/style.css
 
-      # ---------- PDF (Compact, LaTeX-based) ----------
+      # Build PDF source from cv.md (for PDF-only formatting)
       - name: Build PDF source (cv_pdf.md)
-        run: python3 pdf/clean_for_pdf.py
+        run: |
+          python3 pdf/clean_for_pdf.py
+          test -f cv_pdf.md
 
+      # PDF (compact, template-controlled)
       - name: Build Compact PDF (from cv_pdf.md)
         uses: docker://pandoc/latex:latest
         with:
-          args: >
+          args: |
             cv_pdf.md
             -o cv.pdf
             --pdf-engine=xelatex
@@ -46,19 +49,17 @@ jobs:
             -V fontsize=10pt
             -V linestretch=1.03
 
+      # Prepare Pages artifact
+      - name: Prepare site
+        run: |
+          mkdir -p site
+          mv index.html site/index.html
+          mv cv.pdf site/cv.pdf
 
-
-            # ---------- Prepare Pages ----------
-            - name: Prepare site
-              run: |
-                mkdir -p site
-                mv index.html site/index.html
-                mv cv.pdf site/cv.pdf
-
-            - name: Upload Pages artifact
-              uses: actions/upload-pages-artifact@v3
-              with:
-                path: site
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
 
   deploy:
     environment:
