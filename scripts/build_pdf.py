@@ -130,9 +130,9 @@ def latex_doc(data: dict) -> str:
             if dept:
                 parts.append(dept + r"\\[-2pt]")
             if loc:
-                parts.append(loc + r"\\[-2pt]")
-            if gpa:
-                parts.append(r"GPA: " + gpa + r"\\[-2pt]")
+                parts.append(loc + r"\\[-6pt]")
+            #if gpa:
+            #    parts.append(r"GPA: " + gpa + r"\\[-2pt]")
 
             adv = e.get("advisor", "")
             if adv:
