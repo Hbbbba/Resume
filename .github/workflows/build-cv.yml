@@ -33,22 +33,7 @@ jobs:
 
       # ---------- PDF (Compact, LaTeX-based) ----------
       - name: Build PDF source (cv_pdf.md)
-        run: |
-          set -euxo pipefail
-          echo "PWD=$(pwd)"
-          echo "Files in repo root:"
-          ls -lah
-          echo "Files in pdf/:"
-          ls -lah pdf || true
-          echo "Check cv.md exists:"
-          test -f cv.md || (echo "ERROR: cv.md not found"; exit 1)
-          echo "Run script with traceback:"
-          python3 -X faulthandler -u pdf/clean_for_pdf.py
-          echo "Check output:"
-          ls -lah cv_pdf.md
-
-          test -f cv_pdf.md
-          echo "Found cv_pdf.md"
+        run: python3 pdf/clean_for_pdf.py
 
       - name: Build Compact PDF (from cv_pdf.md)
         uses: docker://pandoc/latex:latest
@@ -62,17 +47,18 @@ jobs:
             -V linestretch=1.03
 
 
-      # ---------- Prepare Pages ----------
-      - name: Prepare site
-        run: |
-          mkdir -p site
-          mv index.html site/index.html
-          mv cv.pdf site/cv.pdf
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
+            # ---------- Prepare Pages ----------
+            - name: Prepare site
+              run: |
+                mkdir -p site
+                mv index.html site/index.html
+                mv cv.pdf site/cv.pdf
+
+            - name: Upload Pages artifact
+              uses: actions/upload-pages-artifact@v3
+              with:
+                path: site
 
   deploy:
     environment:
