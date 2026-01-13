@@ -189,8 +189,8 @@ Aug. 2018
 ## References
 
 - **Feng Qian**, Associate Professor  
-  University of Minnesota, Twin Cities  
-  📧 fengqian@umn.edu
+  University of Southern California 
+  📧 fengqian@usc.edu
 
 - **Tian He**, Professor, ACM/IEEE Fellow  
   Southeast University  
