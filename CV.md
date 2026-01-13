@@ -3,7 +3,7 @@
 📍 Los Angeles, CA, USA  
 📧 hubin@usc.edu | 292419703@qq.com
 📞 +1 6124563527 | +86 15366075527  
-🔗 https://github.com/Hbbbba
+🔗 https://github.com/Hbbbba/Resume/main/CV.md
 
 ---
 
