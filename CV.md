@@ -13,7 +13,7 @@
 **Ph.D. in Electrical and Computer Engineering**  
 Ming Hsieh Department of Electrical and Computer Engineering  
 Aug. 2023 – Present  
-**Research Area:** Computer Networks, Wireless Communication, Systems  
+**Research Area:** Computer Networks, Wireless Communication, Machine Learning  
 **Advisor:** Prof. Feng Qian
 
 ---
@@ -21,7 +21,7 @@ Aug. 2023 – Present
 ### University of Minnesota, Twin Cities
 **Ph.D. in Computer Science and Engineering**  
 Aug. 2022 – Aug. 2023  
-**Research Area:** Computer Networks, Wireless Communication, Systems  
+**Research Area:** Computer Networks, Wireless Communication  
 **Advisor:** Prof. Feng Qian
 
 ---
