@@ -132,7 +132,7 @@ def latex_doc(data: dict) -> str:
             if dept:
                 parts.append(dept + r"\\[-2pt]")
             if loc:
-                parts.append(loc + r"\\[-6pt]")
+                parts.append(loc + r"\\[-pt]")
             #if gpa:
             #    parts.append(r"GPA: " + gpa + r"\\[-2pt]")
 
@@ -150,7 +150,7 @@ def latex_doc(data: dict) -> str:
                 parts.append(r"\textbf{Advisor:} " + advisor + r"\\[-2pt]")
 
             # 原来是 \vspace{4pt}，这里改小（或者直接删掉这一行）
-            parts.append(r"\vspace{2pt}")
+            parts.append(r"\vspace{4pt}")
 
     if pubs:
         parts.append(section("Publications"))
