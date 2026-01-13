@@ -150,7 +150,7 @@ def latex_doc(data: dict) -> str:
                 parts.append(r"\textbf{Advisor:} " + advisor + r"\\[-0.5pt]")
 
             # 原来是 \vspace{4pt}，这里改小（或者直接删掉这一行）
-            parts.append(r"\vspace{8pt}")
+            parts.append(r"\vspace{12pt}")
 
     if pubs:
         parts.append(section("Publications"))
