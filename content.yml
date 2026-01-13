@@ -41,7 +41,7 @@ education:
     location: Nanjing, China
     degree: M.Sc. in Computer Science and Engineering
     period: Sept. 2019 – Jun. 2022
-    gpa: "83.87 / 100"
+    #gpa: "83.87 / 100"
     details:
       - "Research Area: Internet of Things, Wireless Communication"
       - "Advisor: Prof. Tian He"
@@ -50,7 +50,7 @@ education:
     location: Nanjing, China
     degree: B.Eng. in Computer Science and Engineering
     period: Sept. 2015 – Jun. 2019
-    gpa: "3.5 / 4.8 (84.8 / 100)"
+    #gpa: "3.5 / 4.8 (84.8 / 100)"
 
   - institution: Singapore University of Technology and Design (SUTD)
     location: Singapore

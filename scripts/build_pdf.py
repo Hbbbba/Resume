@@ -121,28 +121,33 @@ def latex_doc(data: dict) -> str:
             loc = latex_escape(e.get("location", ""))
             gpa = latex_escape(e.get("gpa", ""))
 
-            parts.append(r"\textbf{" + inst + r"}" + (r"\hfill " + period if period else "") + r"\\")
+            # 第一行：学校 + 右侧时间
+            parts.append(r"\textbf{" + inst + r"}" + (r"\hfill " + period if period else "") + r"\\[-2pt]")
+
+            # 下面几行：用 \\[-2pt] 把行距压紧一点
             if degree:
-                parts.append(r"\textbf{" + degree + r"}\\")
+                parts.append(r"\textbf{" + degree + r"}\\[-2pt]")
             if dept:
-                parts.append(dept + r"\\")
+                parts.append(dept + r"\\[-2pt]")
             if loc:
-                parts.append(loc + r"\\")
+                parts.append(loc + r"\\[-2pt]")
             if gpa:
-                parts.append(r"GPA: " + gpa + r"\\")
+                parts.append(r"GPA: " + gpa + r"\\[-2pt]")
 
             adv = e.get("advisor", "")
             if adv:
-                parts.append(r"\textbf{Advisor:} " + latex_escape(adv) + r"\\")
+                parts.append(r"\textbf{Advisor:} " + latex_escape(adv) + r"\\[-2pt]")
 
             proj = e.get("project", {}) or {}
             if proj.get("title", ""):
-                parts.append(r"\textbf{Project:} " + latex_escape(proj["title"]) + r"\\")
+                parts.append(r"\textbf{Project:} " + latex_escape(proj["title"]) + r"\\[-2pt]")
 
             details = e.get("details", []) or []
             if details:
                 parts.append(itemize(details))
-            parts.append(r"\vspace{4pt}")
+
+            # 原来是 \vspace{4pt}，这里改小（或者直接删掉这一行）
+            parts.append(r"\vspace{2pt}")
 
     if pubs:
         parts.append(section("Publications"))
