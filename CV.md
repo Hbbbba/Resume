@@ -1,9 +1,9 @@
 # Bin Hu
 
 📍 Los Angeles, CA, USA  
-📧 binhu@seu.edu.cn | 292419703@qq.com  
-📞 +86 15366075527 | +65 82255240  
-🔗 https://github.com/your-github-username
+📧 hubin@usc.edu | 292419703@qq.com
+📞 +1 6124563527 | +86 15366075527  
+🔗 https://github.com/Hbbbba
 
 ---
 
@@ -70,6 +70,17 @@ A Trustworthy and Efficient Automatic Modulation Classification System based on 
 4. Jiazhao Wang, Wenchao Jiang, Ruofeng Liu, **Bin Hu**, Demin Gao, Shuai Wang  
    *NN-Defined Modulator: Reconfigurable and Portable Software Modulator on IoT Gateways*  
    **USENIX NSDI, 2024**
+
+5. Kai Sun, **Bin Hu**, Zhimeng Yin, Shuai Wang, Shuai Wang, Zhuqing Xu, Tian He  
+   *Joint Multidimensional Features for LoRa Reception in Burst Traffic*  
+   **Computer Networks, Volume 270, 111476 (2025).**  
+   DOI: 10.1016/j.comnet.2025.111476 :contentReference[oaicite:4]{index=4}
+
+6. **Bin Hu**, Feng Qian, Ahmad Hassan, Z. Morley Mao, Zhi-Li Zhang  
+   *Predicting Connectivity and Link Performance in Dynamic LEO Satellite Networks*  
+   **ACM Workshop on Hot Topics in Mobile Computing (HotMobile), 2026. To appear.**
+
+
 
 ---
 
