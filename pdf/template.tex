@@ -1,26 +1,54 @@
 \documentclass[$fontsize$,letterpaper]{article}
 
+% ===== Required for clickable links (\href) =====
 \usepackage[hidelinks]{hyperref}
 
-% Layout
+% ===== Pandoc compatibility shims (avoid undefined control sequence) =====
+% Pandoc may emit \tightlist for compact lists
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{1pt}%
+  \setlength{\parskip}{0pt}%
+  \setlength{\parsep}{0pt}%
+}
+
+% Some pandoc versions may use passthrough for code spans
+\providecommand{\passthrough}[1]{#1}
+
+% If pandoc emits hypertarget/hyperlink, keep safe fallbacks
+\providecommand{\hypertarget}[2]{#2}
+\providecommand{\hyperlink}[2]{#2}
+
+% Safer line breaking for long URLs / text
+\sloppy
+\widowpenalty=10000
+\clubpenalty=10000
+
+% ===== Page layout (no geometry package) =====
 \setlength{\oddsidemargin}{-0.10in}
 \setlength{\evensidemargin}{-0.10in}
 \setlength{\textwidth}{6.7in}
 \setlength{\topmargin}{-0.55in}
 \setlength{\textheight}{9.6in}
+
+% ===== Paragraph spacing =====
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{2.5pt}
 
-% Section titles: ALL CAPS
+% ===== Section titles: ALL CAPS like the sample PDF (no titlesec) =====
 \makeatletter
 \renewcommand\thesection{}
+\renewcommand\thesubsection{}
 \renewcommand\section{\@startsection{section}{1}{0pt}%
   {-0.9ex plus -0.2ex minus -0.2ex}%
   {0.35ex plus 0.1ex}%
   {\normalfont\bfseries\MakeUppercase}}
+\renewcommand\subsection{\@startsection{subsection}{2}{0pt}%
+  {-0.7ex plus -0.2ex minus -0.2ex}%
+  {0.25ex plus 0.1ex}%
+  {\normalfont\bfseries}}
 \makeatother
 
-% Compact lists
+% ===== Compact lists without enumitem =====
 \makeatletter
 \let\olditemize\itemize
 \let\endolditemize\enditemize
@@ -33,20 +61,33 @@
 }{
   \endolditemize
 }
-\makeatother
 
+\let\oldenumerate\enumerate
+\let\endoldenumerate\endenumerate
+\renewenvironment{enumerate}{
+  \oldenumerate
+  \setlength{\itemsep}{1pt}
+  \setlength{\parsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\topsep}{2pt}
+}{
+  \endoldenumerate
+}
+\makeatother
 
 \begin{document}
 
-% Centered header (title + first block from markdown)
+% =========================================================
+% Header: centered "name + contact lines", then left-aligned rule
+% We will take the first top-level header (# Bin Hu) from Markdown as $title$
+% and render the rest of the body normally.
+% =========================================================
+
 \begin{center}
 {\LARGE\bfseries $title$}\par
-\vspace{4pt}
-$for(header-includes)$
-$header-includes$\par
-$endfor$
 \end{center}
 
+% Left-aligned separator line (across text width)
 \vspace{2pt}
 \hrule
 \vspace{10pt}
