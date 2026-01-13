@@ -275,7 +275,7 @@ def latex_doc(data: dict) -> str:
 
 % ===== Font: Times New Roman =====
 \usepackage{fontspec}
-\setmainfont{Times New Roman}[
+\setmainfont{{Times New Roman}}[
   Ligatures=TeX,
   BoldFont = Times New Roman Bold,
   ItalicFont = Times New Roman Italic,
