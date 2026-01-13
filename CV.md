@@ -192,6 +192,10 @@ Aug. 2018
   University of Southern California
   📧 fengqian@usc.edu
 
+- **Feng Qian**, Associate Professor  
+  University of Southern California  
+  📧 fengqian@usc.edu
+
 - **Tian He**, Professor, ACM/IEEE Fellow  
   Southeast University  
   📧 tianhe@seu.edu.cn
