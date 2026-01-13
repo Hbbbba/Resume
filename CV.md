@@ -189,7 +189,7 @@ Aug. 2018
 ## References
 
 - **Feng Qian**, Associate Professor  
-  University of Southern California 
+  University of Southern California
   📧 fengqian@usc.edu
 
 - **Tian He**, Professor, ACM/IEEE Fellow  
