@@ -138,7 +138,7 @@ def latex_doc(data: dict) -> str:
             if area:
                 parts.append(r"\textbf{Research Area:} " + area + r"\\[-0.5pt]")
             if advisor:
-                parts.append(r"\textbf{Advisor:} " + advisor + r"\\[-0.5pt]")
+                parts.append(r"\textbf{Advisor:} " + advisor + r"\\[+10pt]")
 
             # 原来是 \vspace{4pt}，这里改小（或者直接删掉这一行）
             #parts.append(r"\vspace{12pt}")
