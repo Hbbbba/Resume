@@ -332,7 +332,7 @@ def main() -> None:
         render_funded_projects(data),
         render_industry(data),
         render_list_section("Honors & Awards", data.get("honors_awards", []) or []),
-        render_skills(data),
+        #render_skills(data),
         render_references(data),
     ]
     body = "\n".join([p for p in body_parts if p])

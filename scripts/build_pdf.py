@@ -230,16 +230,16 @@ def latex_doc(data: dict) -> str:
         parts.append(section("Honors & Awards"))
         parts.append(itemize([str(x) for x in honors]))
 
-    if skills:
-        parts.append(section("Skills"))
-        for k, arr in skills.items():
-            title = latex_escape(k.replace("_", " ").title())
-            vals = arr or []
-            if not vals:
-                continue
-            parts.append(r"\textbf{" + title + r"}\\")
-            parts.append(itemize([str(v) for v in vals]))
-            parts.append(r"\vspace{2pt}")
+    # if skills:
+    #     parts.append(section("Skills"))
+    #     for k, arr in skills.items():
+    #         title = latex_escape(k.replace("_", " ").title())
+    #         vals = arr or []
+    #         if not vals:
+    #             continue
+    #         parts.append(r"\textbf{" + title + r"}\\")
+    #         parts.append(itemize([str(v) for v in vals]))
+    #         parts.append(r"\vspace{2pt}")
 
     if refs:
         parts.append(section("References"))
