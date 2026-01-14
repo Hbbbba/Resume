@@ -124,7 +124,7 @@ def latex_doc(data: dict) -> str:
             advisor = latex_escape(e.get("Advisor", ""))
 
             # 第一行：学校 + 右侧时间
-            parts.append(r"\textbf{" + inst + r"}" + (r"\hfill " + period if period else "") + r"\\[-2pt]")
+            parts.append(r"\textbf{" + inst + r"}" + (r"\hfill " + period if period else "") + r"\\[-0.5pt]")
 
             # 下面几行：用 \\[-2pt] 把行距压紧一点
             if degree:
