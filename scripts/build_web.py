@@ -13,11 +13,13 @@ except Exception:
     print("Missing dependency: PyYAML. Install with: pip install pyyaml", file=sys.stderr)
     raise
 
-ROOT = Path(__file__).resolve().parents[1]
+SCRIPT_DIR = Path(__file__).resolve().parent
+ROOT = SCRIPT_DIR.parent
+
 CONTENT = ROOT / "content.yml"
+STYLE_CSS = ROOT / "style.css"
 OUT_DIR = ROOT / "site"
 OUT_HTML = OUT_DIR / "index.html"
-STYLE_CSS = ROOT / "style.css"
 
 I18N = {
     "en": {
