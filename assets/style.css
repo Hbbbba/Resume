@@ -258,7 +258,7 @@ a:hover {
   border: 1px solid var(--line);
   border-radius: 24px;
   box-shadow: var(--shadow);
-  padding: 28px 32px;
+  padding: 30px 40px;
   margin-bottom: 26px;
 }
 
@@ -266,13 +266,13 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 16px;
-  max-width: 760px;
+  gap: 18px;
+  max-width: 860px;
   margin: 0 auto;
 }
 
 .header-text {
-  flex: 0 1 560px;
+  flex: 0 1 620px;
   min-width: 0;
   text-align: left;
 }
@@ -282,15 +282,13 @@ a:hover {
 }
 
 .profile-photo {
-  width: 130px;
-  height: 160px;
-  object-fit: contain;
-  background: #fff;
+  width: 170px;
+  height: 210px;
+  object-fit: cover;
   display: block;
-  border-radius: 14px;
+  border-radius: 16px;
   border: 1px solid var(--line);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  padding: 4px;
 }
 
 .name {
@@ -322,7 +320,7 @@ a:hover {
   }
 
   .profile-photo {
-    width: 110px;
-    height: 135px;
+    width: 140px;
+    height: 175px;
   }
 }
