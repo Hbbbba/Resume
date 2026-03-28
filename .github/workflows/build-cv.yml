@@ -57,11 +57,12 @@ jobs:
           test -f site/index.html
           echo "Generated site/index.html"
 
-      - name: Build PDF (site/cv.pdf)
+      - name: Build PDF (site/cv_en.pdf + site/cv_zh.pdf)
         run: |
           python scripts/build_pdf.py
-          test -f site/cv.pdf
-          echo "Generated site/cv.pdf"
+          test -f site/cv_en.pdf
+          test -f site/cv_zh.pdf
+          echo "Generated site/cv_en.pdf and site/cv_zh.pdf"
 
       # Upload site/ as Pages artifact
       - name: Upload Pages artifact
