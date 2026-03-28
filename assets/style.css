@@ -265,8 +265,8 @@ a:hover {
 .header-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 28px;
+  justify-content: flex-start;
+  gap: 18px;
 }
 
 .header-text {
