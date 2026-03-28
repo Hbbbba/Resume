@@ -2,6 +2,7 @@ profile:
   en:
     name: Bin Hu
     location: Los Angeles, CA, USA
+    photo: "assets/profile.jpg"
 
     email:
       - hubin@usc.edu
@@ -18,6 +19,7 @@ profile:
   zh:
     name: 胡斌
     location: 美国加州洛杉矶
+    photo: "assets/profile.jpg"
 
     email:
       - hubin@usc.edu

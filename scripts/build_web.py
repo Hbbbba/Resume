@@ -84,6 +84,7 @@ def build_header(profile: dict, lang: str) -> str:
 
     name = h(profile.get("name", ""))
     location = h(profile.get("location", ""))
+    photo = h(profile.get("photo", ""))
 
     emails = profile.get("email", []) or []
     phones = profile.get("phone", []) or []
@@ -119,10 +120,23 @@ def build_header(profile: dict, lang: str) -> str:
 
     meta = "<br/>".join(lines)
 
+    photo_html = ""
+    if photo:
+        photo_html = f'''
+        <div class="profile-photo-wrap">
+          <img class="profile-photo" src="{photo}" alt="{name}">
+        </div>
+        '''
+
     return f"""
     <div class="header">
-      <h1 class="name">{name}</h1>
-      <div class="meta">{meta}</div>
+      <div class="header-inner">
+        <div class="header-text">
+          <h1 class="name">{name}</h1>
+          <div class="meta">{meta}</div>
+        </div>
+        {photo_html}
+      </div>
     </div>
     """
 
