@@ -57,6 +57,12 @@ jobs:
           test -f site/index.html
           echo "Generated site/index.html"
 
+      - name: Copy assets into site
+        run: |
+          mkdir -p site/assets
+          cp -r assets/* site/assets/
+          ls -lah site/assets
+
       - name: Build PDF (site/cv_en.pdf + site/cv_zh.pdf)
         run: |
           python scripts/build_pdf.py
@@ -64,7 +70,6 @@ jobs:
           test -f site/cv_zh.pdf
           echo "Generated site/cv_en.pdf and site/cv_zh.pdf"
 
-      # Upload site/ as Pages artifact
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
