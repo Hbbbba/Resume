@@ -263,13 +263,19 @@ def latex_doc(data: dict, lang: str) -> str:
             tt = latex_escape(pick_lang_value(r.get("title", ""), lang))
             aff = latex_escape(pick_lang_value(r.get("affiliation", ""), lang))
             em = r.get("email", "")
-            parts.append(r"\textbf{" + nm + r"}\\")
-            line = " — ".join([x for x in [tt, aff] if x])
-            if line:
-                parts.append(line + r"\\")
+
+            parts.append(r"\textbf{" + nm + r"}\\[-1pt]")
+
+            if tt:
+                parts.append(tt + r"\\[-1pt]")
+
+            if aff:
+                parts.append(aff + r"\\[-1pt]")
+
             if em:
-                parts.append(labels["email"] + ": " + href("mailto:" + em, em) + r"\\")
-            parts.append(r"\vspace{6pt}")
+                parts.append(latex_escape(labels["email"]) + ": " + href("mailto:" + em, em) + r"\\")
+
+            parts.append(r"\vspace{8pt}")
 
     body = "\n".join(parts)
 
