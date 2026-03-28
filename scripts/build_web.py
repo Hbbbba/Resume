@@ -62,9 +62,17 @@ def h(s: str) -> str:
     return html.escape("" if s is None else str(s), quote=True)
 
 def load_css() -> str:
-    if STYLE_CSS.exists():
-        return STYLE_CSS.read_text(encoding="utf-8")
-    return ""
+    print(f"STYLE_CSS = {STYLE_CSS}")
+    print(f"STYLE exists = {STYLE_CSS.exists()}")
+
+    if not STYLE_CSS.exists():
+        raise FileNotFoundError(f"style.css not found: {STYLE_CSS}")
+
+    css = STYLE_CSS.read_text(encoding="utf-8")
+    if not css.strip():
+        raise ValueError(f"style.css is empty: {STYLE_CSS}")
+
+    return css
 
 def pick_lang_value(v, lang: str):
     if isinstance(v, dict):
