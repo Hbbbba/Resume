@@ -264,15 +264,17 @@ def latex_doc(data: dict, lang: str) -> str:
             aff = latex_escape(pick_lang_value(r.get("affiliation", ""), lang))
             em = r.get("email", "")
 
-            parts.append(r"\textbf{" + nm + r"}\\")
+            parts.append(r"\noindent\textbf{" + nm + r"}\par")
             if tt:
-                parts.append(tt + r"\\")
+                parts.append(r"\noindent " + tt + r"\par")
             if aff:
-                parts.append(aff + r"\\")
+                parts.append(r"\noindent " + aff + r"\par")
             if em:
-                parts.append(latex_escape(labels["email"]) + ": " + href("mailto:" + em, em) + r"\\")
+                parts.append(
+                    r"\noindent " + latex_escape(labels["email"]) + ": " + href("mailto:" + em, em) + r"\par"
+                )
 
-            parts.append(r"\vspace{6pt}")
+            parts.append(r"\vspace{8pt}")
     body = "\n".join(parts)
 
     if lang == "zh":
