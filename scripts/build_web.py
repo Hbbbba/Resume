@@ -17,7 +17,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPT_DIR.parent
 
 CONTENT = ROOT / "content.yml"
-STYLE_CSS = ROOT / "style.css"
+STYLE_CSS = ROOT / "assets"/ "style.css"
 OUT_DIR = ROOT / "site"
 OUT_HTML = OUT_DIR / "index.html"
 
