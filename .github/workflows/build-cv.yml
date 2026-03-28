@@ -33,13 +33,15 @@ jobs:
           pip install pyyaml
 
       # Install XeLaTeX for PDF generation
-      - name: Install TeX (XeLaTeX)
+      - name: Install TeX (XeLaTeX + Chinese support)
         run: |
           sudo apt-get update
           sudo apt-get install -y \
             texlive-xetex \
             texlive-fonts-recommended \
-            texlive-latex-extra
+            texlive-latex-extra \
+            texlive-lang-chinese \
+            fonts-noto-cjk
 
       # Optional: show repo files for debugging if anything missing
       - name: Show repo files
