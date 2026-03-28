@@ -264,20 +264,14 @@ def latex_doc(data: dict, lang: str) -> str:
             aff = latex_escape(pick_lang_value(r.get("affiliation", ""), lang))
             em = r.get("email", "")
 
-            block = []
-            block.append(r"\textbf{" + nm + r"}")
+            parts.append(r"\textbf{" + nm + r"}\\")
             if tt:
-                block.append(tt)
+                parts.append(tt + r"\\")
             if aff:
-                block.append(aff)
+                parts.append(aff + r"\\")
             if em:
-                block.append(latex_escape(labels["email"]) + ": " + href("mailto:" + em, em))
+                parts.append(latex_escape(labels["email"]) + ": " + href("mailto:" + em, em) + r"\\")
 
-            parts.append(r"\begin{samepage}")
-            parts.append(r"\begin{flushleft}")
-            parts.append(r" \\".join(block))
-            parts.append(r"\end{flushleft}")
-            parts.append(r"\end{samepage}")
             parts.append(r"\vspace{6pt}")
     body = "\n".join(parts)
 
