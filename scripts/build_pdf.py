@@ -17,14 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / "content.yml"
 OUT_DIR = ROOT / "site"
 BUILD_DIR = ROOT / "build_pdf"
-TEX = BUILD_DIR / "cv.tex"
-PDF = BUILD_DIR / "cv.pdf"
-OUT_PDF = OUT_DIR / "cv.pdf"
 
 def latex_escape(s: str) -> str:
-    """
-    Escape LaTeX special chars for normal text.
-    """
     if s is None:
         return ""
     s = str(s)
@@ -41,6 +35,11 @@ def latex_escape(s: str) -> str:
         "^": r"\textasciicircum{}",
     }
     return "".join(repl.get(ch, ch) for ch in s)
+
+def pick_lang_value(v, lang: str):
+    if isinstance(v, dict):
+        return v.get(lang, v.get("en", ""))
+    return v
 
 def bold_my_name(author: str, my_name: str = "Bin Hu") -> str:
     a = latex_escape(author)
@@ -60,21 +59,58 @@ def itemize(lines: list[str]) -> str:
     out.append(r"\end{itemize}")
     return "\n".join(out) + "\n"
 
-def latex_doc(data: dict) -> str:
-    name = latex_escape(data.get("name", ""))
-    location = latex_escape(data.get("location", ""))
+def href(url: str, text: str) -> str:
+    if not url:
+        return latex_escape(text)
+    return r"\href{" + latex_escape(url) + "}{" + latex_escape(text) + "}"
 
-    emails = data.get("email", []) or []
-    phones = data.get("phone", []) or []
-    links = data.get("links", {}) or {}
+def latex_doc(data: dict, lang: str) -> str:
+    labels = {
+        "en": {
+            "website": "Website",
+            "pdf": "PDF",
+            "download": "Download CV (PDF)",
+            "email": "E-mail",
+            "tel": "Tel",
+            "education": "Education",
+            "publications": "Publications",
+            "experience": "Research & Experience",
+            "funded_projects": "Funded Projects",
+            "industry_experience": "Industry Experience",
+            "honors_awards": "Honors & Awards",
+            "references": "References",
+            "research_area": "Research Area",
+            "advisor": "Advisor",
+        },
+        "zh": {
+            "website": "主页",
+            "pdf": "PDF",
+            "download": "下载简历（PDF）",
+            "email": "邮箱",
+            "tel": "电话",
+            "education": "教育经历",
+            "publications": "论文发表",
+            "experience": "科研与经历",
+            "funded_projects": "科研项目",
+            "industry_experience": "工业界经历",
+            "honors_awards": "荣誉奖项",
+            "references": "推荐人",
+            "research_area": "研究方向",
+            "advisor": "导师",
+        },
+    }[lang]
+
+    profile = data["profile"][lang]
+
+    name = latex_escape(profile.get("name", ""))
+    location = latex_escape(profile.get("location", ""))
+
+    emails = profile.get("email", []) or []
+    phones = profile.get("phone", []) or []
+    links = profile.get("links", {}) or {}
 
     website = links.get("website", "")
     pdf_link = links.get("pdf", "")
-
-    def href(url: str, text: str) -> str:
-        if not url:
-            return latex_escape(text)
-        return r"\href{" + latex_escape(url) + "}{" + latex_escape(text) + "}"
 
     email_line = " / ".join([latex_escape(e) for e in emails if e])
     phone_line = " / ".join([latex_escape(p) for p in phones if p])
@@ -82,81 +118,66 @@ def latex_doc(data: dict) -> str:
     link_parts = []
     if website:
         show = re.sub(r"^https?://", "", website)
-        link_parts.append("Website: " + href(website, show))
+        link_parts.append(labels["website"] + ": " + href(website, show))
     if pdf_link:
-        link_parts.append("PDF: " + href(pdf_link, "Download CV (PDF)"))
+        link_parts.append(labels["pdf"] + ": " + href(pdf_link, labels["download"]))
     link_line = " \\quad ".join(link_parts)
 
     header_lines = []
     if location:
         header_lines.append(location)
     if email_line:
-        header_lines.append(r"E-mail: " + email_line)
+        header_lines.append(labels["email"] + ": " + email_line)
     if phone_line:
-        header_lines.append(r"Tel: " + phone_line)
+        header_lines.append(labels["tel"] + ": " + phone_line)
     if link_line:
         header_lines.append(link_line)
 
     header = "\n".join([r"\centerline{" + x + r"}" for x in header_lines])
 
-    # ---- build body (same as before) ----
+    parts = []
+
     edu = data.get("education", []) or []
-    pubs = data.get("publications", []) or []
-    exp = data.get("experience", []) or []
-    funded = data.get("funded_projects", []) or []
-    industry = data.get("industry_experience", []) or []
-    honors = data.get("honors_awards", []) or []
-    skills = data.get("skills", {}) or {}
-    refs = data.get("references", []) or []
-
-    parts: list[str] = []
-
     if edu:
-        parts.append(section("Education"))
+        parts.append(section(labels["education"]))
         for e in edu:
-            inst = latex_escape(e.get("institution", ""))
-            period = latex_escape(e.get("period", ""))
-            degree = latex_escape(e.get("degree", ""))
-            dept = latex_escape(e.get("department", ""))
-            loc = latex_escape(e.get("location", ""))
-            gpa = latex_escape(e.get("gpa", ""))
-            area = latex_escape(e.get("Research Area", ""))
-            advisor = latex_escape(e.get("Advisor", ""))
+            inst = latex_escape(pick_lang_value(e.get("institution", ""), lang))
+            period = latex_escape(pick_lang_value(e.get("period", ""), lang))
+            degree = latex_escape(pick_lang_value(e.get("degree", ""), lang))
+            dept = latex_escape(pick_lang_value(e.get("department", ""), lang))
+            loc = latex_escape(pick_lang_value(e.get("location", ""), lang))
+            area = latex_escape(pick_lang_value(e.get("research_area", ""), lang))
+            advisor = latex_escape(pick_lang_value(e.get("advisor", ""), lang))
 
-            # 第一行：学校 + 右侧时间
             parts.append(r"\textbf{" + inst + r"}" + (r"\hfill " + period if period else "") + r"\\[-0.5pt]")
-
-            # 下面几行：用 \\[-2pt] 把行距压紧一点
             if degree:
                 parts.append(r"\textbf{" + degree + r"}\\[-0.5pt]")
             if dept:
                 parts.append(dept + r"\\[-0.5pt]")
             if loc:
                 parts.append(loc + r"\\[-0.5pt]")
-            #if gpa:
-            #    parts.append(r"GPA: " + gpa + r"\\[-2pt]")
             if area:
-                parts.append(r"\textbf{Research Area:} " + area + r"\\[-0.5pt]")
+                parts.append(r"\textbf{" + latex_escape(labels["research_area"]) + r":} " + area + r"\\[-0.5pt]")
             if advisor:
-                parts.append(r"\textbf{Advisor:} " + advisor + r"\\[+10pt]")
+                parts.append(r"\textbf{" + latex_escape(labels["advisor"]) + r":} " + advisor + r"\\[+10pt]")
 
-            # 原来是 \vspace{4pt}，这里改小（或者直接删掉这一行）
-            #parts.append(r"\vspace{12pt}")
-
+    pubs = data.get("publications", []) or []
     if pubs:
-        parts.append(section("Publications"))
+        parts.append(section(labels["publications"]))
         parts.append(r"\begin{enumerate}")
         for p in pubs:
-            title = latex_escape(p.get("title", ""))
+            title = latex_escape(pick_lang_value(p.get("title", ""), lang))
             authors = p.get("authors", []) or []
-            venue = latex_escape(p.get("venue", ""))
+            venue = latex_escape(pick_lang_value(p.get("venue", ""), lang))
             year = p.get("year", "")
-            note = latex_escape(p.get("note", "")) if p.get("note", "") else ""
-            volume = latex_escape(p.get("volume", "")) if p.get("volume", "") else ""
-            pages = latex_escape(p.get("pages", "")) if p.get("pages", "") else ""
-            doi = latex_escape(p.get("doi", "")) if p.get("doi", "") else ""
+            note = latex_escape(pick_lang_value(p.get("note", ""), lang)) if p.get("note") else ""
+            volume = latex_escape(str(p.get("volume", ""))) if p.get("volume") else ""
+            pages = latex_escape(str(p.get("pages", ""))) if p.get("pages") else ""
+            doi = latex_escape(str(p.get("doi", ""))) if p.get("doi") else ""
 
-            author_str = ", ".join([bold_my_name(a, "Bin Hu") for a in authors])
+            author_str = ", ".join([
+                bold_my_name(pick_lang_value(a, lang), "Bin Hu") for a in authors
+            ])
 
             meta_bits = []
             if venue:
@@ -182,96 +203,103 @@ def latex_doc(data: dict) -> str:
             parts.append(r"\vspace{2pt}")
         parts.append(r"\end{enumerate}")
 
+    exp = data.get("experience", []) or []
     if exp:
-        parts.append(section("Research & Experience"))
+        parts.append(section(labels["experience"]))
         for e in exp:
-            org = latex_escape(e.get("organization", ""))
-            role = latex_escape(e.get("role", ""))
-            period = latex_escape(e.get("period", ""))
+            org = latex_escape(pick_lang_value(e.get("organization", ""), lang))
+            role = latex_escape(pick_lang_value(e.get("role", ""), lang))
+            period = latex_escape(pick_lang_value(e.get("period", ""), lang))
             details = e.get("details", []) or []
             parts.append(r"\textbf{" + org + r"}" + (r"\hfill " + period if period else "") + r"\\")
             if role:
                 parts.append(r"\textbf{" + role + r"}\\")
             if details:
-                parts.append(itemize(details))
+                parts.append(itemize([pick_lang_value(x, lang) for x in details]))
             parts.append(r"\vspace{4pt}")
 
+    funded = data.get("funded_projects", []) or []
     if funded:
-        parts.append(section("Funded Projects"))
+        parts.append(section(labels["funded_projects"]))
         items = []
         for fp in funded:
-            sponsor = fp.get("sponsor", "")
-            title = fp.get("title", "")
+            sponsor = pick_lang_value(fp.get("sponsor", ""), lang)
+            title = pick_lang_value(fp.get("title", ""), lang)
             projects = fp.get("projects", []) or []
             if title:
                 items.append(f"{sponsor} — {title}")
             else:
                 if sponsor and projects:
-                    items.append(f"{sponsor}: " + "; ".join(projects))
+                    items.append(f"{sponsor}: " + "; ".join(pick_lang_value(x, lang) for x in projects))
                 elif sponsor:
                     items.append(str(sponsor))
         parts.append(itemize(items))
 
+    industry = data.get("industry_experience", []) or []
     if industry:
-        parts.append(section("Industry Experience"))
+        parts.append(section(labels["industry_experience"]))
         for e in industry:
-            org = latex_escape(e.get("organization", ""))
-            role = latex_escape(e.get("role", ""))
-            period = latex_escape(e.get("period", ""))
+            org = latex_escape(pick_lang_value(e.get("organization", ""), lang))
+            role = latex_escape(pick_lang_value(e.get("role", ""), lang))
+            period = latex_escape(pick_lang_value(e.get("period", ""), lang))
             details = e.get("details", []) or []
             parts.append(r"\textbf{" + org + r"}" + (r"\hfill " + period if period else "") + r"\\")
             if role:
                 parts.append(r"\textbf{" + role + r"}\\")
             if details:
-                parts.append(itemize(details))
+                parts.append(itemize([pick_lang_value(x, lang) for x in details]))
             parts.append(r"\vspace{4pt}")
 
+    honors = data.get("honors_awards", []) or []
     if honors:
-        parts.append(section("Honors & Awards"))
-        parts.append(itemize([str(x) for x in honors]))
+        parts.append(section(labels["honors_awards"]))
+        parts.append(itemize([pick_lang_value(x, lang) for x in honors]))
 
-    # if skills:
-    #     parts.append(section("Skills"))
-    #     for k, arr in skills.items():
-    #         title = latex_escape(k.replace("_", " ").title())
-    #         vals = arr or []
-    #         if not vals:
-    #             continue
-    #         parts.append(r"\textbf{" + title + r"}\\")
-    #         parts.append(itemize([str(v) for v in vals]))
-    #         parts.append(r"\vspace{2pt}")
-
+    refs = data.get("references", []) or []
     if refs:
-        parts.append(section("References"))
+        parts.append(section(labels["references"]))
         for r in refs:
-            nm = latex_escape(r.get("name", ""))
-            tt = latex_escape(r.get("title", ""))
-            aff = latex_escape(r.get("affiliation", ""))
+            nm = latex_escape(pick_lang_value(r.get("name", ""), lang))
+            tt = latex_escape(pick_lang_value(r.get("title", ""), lang))
+            aff = latex_escape(pick_lang_value(r.get("affiliation", ""), lang))
             em = latex_escape(r.get("email", ""))
             parts.append(r"\textbf{" + nm + r"}\\")
             line = " — ".join([x for x in [tt, aff] if x])
             if line:
                 parts.append(line + r"\\")
             if em:
-                parts.append(r"E-mail: " + href("mailto:" + em, em) + r"\\")
+                parts.append(labels["email"] + ": " + href("mailto:" + em, em) + r"\\")
             parts.append(r"\vspace{6pt}")
 
     body = "\n".join(parts)
 
-    # ===== IMPORTANT: NOT an f-string =====
+    if lang == "zh":
+        extra_font = r"""
+\usepackage{xeCJK}
+\IfFontExistsTF{Songti SC}{
+  \setCJKmainfont{Songti SC}
+}{
+  \IfFontExistsTF{SimSun}{
+    \setCJKmainfont{SimSun}
+  }{
+    \setCJKmainfont{Noto Serif CJK SC}
+  }
+}
+"""
+    else:
+        extra_font = ""
+
     tex_template = r"""
 \documentclass[10pt,letterpaper]{article}
 \usepackage[margin=0.75in]{geometry}
 \usepackage[hidelinks]{hyperref}
-
-% ===== Font: Times New Roman (XeLaTeX) =====
 \usepackage{fontspec}
+__EXTRA_FONT__
 \IfFontExistsTF{Times New Roman}{
   \setmainfont{Times New Roman}
 }{
   \setmainfont{TeX Gyre Termes}
 }
-
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{3pt}
 
@@ -281,7 +309,6 @@ def latex_doc(data: dict) -> str:
   {-0.8ex}{0.6ex}{\normalfont\bfseries\MakeUppercase}}
 \makeatother
 
-% Compact lists
 \usepackage{enumitem}
 \setlist[itemize]{leftmargin=*, itemsep=1pt, topsep=2pt}
 \setlist[enumerate]{leftmargin=*, itemsep=2pt, topsep=2pt}
@@ -303,11 +330,11 @@ __BODY__
 
     return (
         tex_template
+        .replace("__EXTRA_FONT__", extra_font)
         .replace("__NAME__", name)
         .replace("__HEADER__", header)
         .replace("__BODY__", body)
     )
-
 
 def run(cmd: list[str], cwd: Path) -> None:
     p = subprocess.run(cmd, cwd=str(cwd), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
@@ -315,32 +342,38 @@ def run(cmd: list[str], cwd: Path) -> None:
     if p.returncode != 0:
         raise RuntimeError(f"Command failed: {' '.join(cmd)}")
 
+def build_one(data: dict, lang: str, out_name: str) -> None:
+    tex_path = BUILD_DIR / f"cv_{lang}.tex"
+    pdf_path = BUILD_DIR / f"cv_{lang}.pdf"
+    out_pdf = OUT_DIR / out_name
+
+    tex_path.write_text(latex_doc(data, lang), encoding="utf-8")
+    print(f"Wrote {tex_path}")
+
+    run(["xelatex", "-interaction=nonstopmode", "-halt-on-error", tex_path.name], cwd=BUILD_DIR)
+    run(["xelatex", "-interaction=nonstopmode", "-halt-on-error", tex_path.name], cwd=BUILD_DIR)
+
+    if not pdf_path.exists():
+        print(f"Expected PDF not found: {pdf_path}", file=sys.stderr)
+        sys.exit(3)
+
+    out_pdf.write_bytes(pdf_path.read_bytes())
+    print(f"Wrote {out_pdf}")
+
 def main() -> None:
     data = yaml.safe_load(CONTENT.read_text(encoding="utf-8"))
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     BUILD_DIR.mkdir(parents=True, exist_ok=True)
 
-    TEX.write_text(latex_doc(data), encoding="utf-8")
-    print(f"Wrote {TEX}")
-
-    # Ensure xelatex exists
     try:
         subprocess.run(["xelatex", "--version"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
     except Exception:
-        print("xelatex not found. Install TeX Live XeLaTeX, e.g.: sudo apt-get install texlive-xetex", file=sys.stderr)
+        print("xelatex not found. Install TeX Live XeLaTeX.", file=sys.stderr)
         sys.exit(2)
 
-    # Compile twice for stable references
-    run(["xelatex", "-interaction=nonstopmode", "-halt-on-error", TEX.name], cwd=BUILD_DIR)
-    run(["xelatex", "-interaction=nonstopmode", "-halt-on-error", TEX.name], cwd=BUILD_DIR)
-
-    if not PDF.exists():
-        print(f"Expected PDF not found: {PDF}", file=sys.stderr)
-        sys.exit(3)
-
-    OUT_PDF.write_bytes(PDF.read_bytes())
-    print(f"Wrote {OUT_PDF}")
+    build_one(data, "en", "cv_en.pdf")
+    build_one(data, "zh", "cv_zh.pdf")
 
 if __name__ == "__main__":
     main()

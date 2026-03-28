@@ -1,71 +1,153 @@
-# ======================
-# Basic Information
-# ======================
-name: Bin Hu
-location: Los Angeles, CA, USA
-
-email:
-  - hubin@usc.edu
-  - 292419703@qq.com
-
-phone:
-  - "+1 6124563527"
-  - "+86 15366075527"
-
-links:
-  website: "https://Hbbbba.github.io/Resume/"
-  pdf: "https://Hbbbba.github.io/Resume/cv.pdf"
-
-# ======================
-# Education
-# ======================
-education:
-  - institution: University of Southern California (USC)
+profile:
+  en:
+    name: Bin Hu
     location: Los Angeles, CA, USA
-    degree: Ph.D. in Electrical and Computer Engineering
-    department: Ming Hsieh Department of Electrical and Computer Engineering
-    period: Aug. 2023 – Present
-    Research Area: Computer Networks, Satellite Networks, Video, Machine Learning
-    Advisor: Prof. Feng Qian
 
-  - institution: University of Minnesota, Twin Cities
-    location: Minneapolis, MN, USA
-    degree: Ph.D. in Computer Science and Engineering
-    department: Department of Computer Science and Engineering
-    period: Aug. 2022 – Aug. 2023
-    Research Area: Computer Networks, Wireless Communication
-    Advisor: Prof. Feng Qian
+    email:
+      - hubin@usc.edu
+      - 292419703@qq.com
 
-  - institution: Southeast University (SEU)
-    location: Nanjing, China
-    degree: M.Sc. in Computer Science and Engineering
-    department: School of Computer Science and Engineering
-    period: Sept. 2019 – Jun. 2022
-    #gpa: "83.87 / 100"
-    Research Area: Internet of Things, Wireless Communication
-    Advisor: Prof. Tian He
+    phone:
+      - "+1 6124563527"
+      - "+86 15366075527"
 
-  - institution: Singapore University of Technology and Design (SUTD)
-    location: Singapore
-    degree: Exchange Student / Research Assistant
-    department: Pillar of Information Systems Technology and Design
-    period: May 2021 – May 2022
-    Research Area: Automatic Modulation Classification, Explainable AI
-    Advisor: Prof. Wenchao Jiang
+    links:
+      website: "https://Hbbbba.github.io/Resume/"
+      pdf: "https://Hbbbba.github.io/Resume/cv_en.pdf"
 
+  zh:
+    name: 胡斌
+    location: 美国加州洛杉矶
 
-  - institution: Southeast University (SEU)
-    location: Nanjing, China
-    degree: B.Eng. in Computer Science and Engineering
-    department: School of Computer Science and Engineering
-    period: Sept. 2015 – Jun. 2019
-    #gpa: "3.5 / 4.8 (84.8 / 100)"
+    email:
+      - hubin@usc.edu
+      - 292419703@qq.com
 
+    phone:
+      - "+1 6124563527"
+      - "+86 15366075527"
 
-# ======================
-# Publications
-# ======================
+    links:
+      website: "https://Hbbbba.github.io/Resume/"
+      pdf: "https://Hbbbba.github.io/Resume/cv_zh.pdf"
+
+education:
+  - institution:
+      en: University of Southern California (USC)
+      zh: 南加州大学（USC）
+    location:
+      en: Los Angeles, CA, USA
+      zh: 美国加州洛杉矶
+    degree:
+      en: Ph.D. in Electrical and Computer Engineering
+      zh: 电子与计算机工程博士
+    department:
+      en: Ming Hsieh Department of Electrical and Computer Engineering
+      zh: Ming Hsieh 电子与计算机工程系
+    period:
+      en: Aug. 2023 – Present
+      zh: 2023年8月 – 至今
+    research_area:
+      en: Computer Networks, Satellite Networks, Video, Machine Learning
+      zh: 计算机网络、卫星网络、视频、机器学习
+    advisor:
+      en: Prof. Feng Qian
+      zh: 钱锋教授
+
+  - institution:
+      en: University of Minnesota, Twin Cities
+      zh: 明尼苏达大学双城分校
+    location:
+      en: Minneapolis, MN, USA
+      zh: 美国明尼苏达州明尼阿波利斯
+    degree:
+      en: Ph.D. in Computer Science and Engineering
+      zh: 计算机科学与工程博士
+    department:
+      en: Department of Computer Science and Engineering
+      zh: 计算机科学与工程系
+    period:
+      en: Aug. 2022 – Aug. 2023
+      zh: 2022年8月 – 2023年8月
+    research_area:
+      en: Computer Networks, Wireless Communication
+      zh: 计算机网络、无线通信
+    advisor:
+      en: Prof. Feng Qian
+      zh: 钱锋教授
+
+  - institution:
+      en: Southeast University (SEU)
+      zh: 东南大学（SEU）
+    location:
+      en: Nanjing, China
+      zh: 中国南京
+    degree:
+      en: M.Sc. in Computer Science and Engineering
+      zh: 计算机科学与工程硕士
+    department:
+      en: School of Computer Science and Engineering
+      zh: 计算机科学与工程学院
+    period:
+      en: Sept. 2019 – Jun. 2022
+      zh: 2019年9月 – 2022年6月
+    research_area:
+      en: Internet of Things, Wireless Communication
+      zh: 物联网、无线通信
+    advisor:
+      en: Prof. Tian He
+      zh: 贺田教授
+
+  - institution:
+      en: Singapore University of Technology and Design (SUTD)
+      zh: 新加坡科技设计大学（SUTD）
+    location:
+      en: Singapore
+      zh: 新加坡
+    degree:
+      en: Exchange Student / Research Assistant
+      zh: 交换生 / 研究助理
+    department:
+      en: Pillar of Information Systems Technology and Design
+      zh: 信息系统技术与设计方向
+    period:
+      en: May 2021 – May 2022
+      zh: 2021年5月 – 2022年5月
+    research_area:
+      en: Automatic Modulation Classification, Explainable AI
+      zh: 自动调制识别、可解释人工智能
+    advisor:
+      en: Prof. Wenchao Jiang
+      zh: 蒋文超教授
+
+  - institution:
+      en: Southeast University (SEU)
+      zh: 东南大学（SEU）
+    location:
+      en: Nanjing, China
+      zh: 中国南京
+    degree:
+      en: B.Eng. in Computer Science and Engineering
+      zh: 计算机科学与工程学士
+    department:
+      en: School of Computer Science and Engineering
+      zh: 计算机科学与工程学院
+    period:
+      en: Sept. 2015 – Jun. 2019
+      zh: 2015年9月 – 2019年6月
+
 publications:
+  - title: "Prediction-Driven QoE Optimization for Video Calls over LEO Satellite Networks"
+    authors:
+      - Bin Hu
+      - Ritvik Janamsetty
+      - Anlan Zhang
+      - Feng Qian
+    venue: "IEEE INFOCOM Poster"
+    year: 2026
+    note: "Accepted"
+
+
   - title: "Predicting Connectivity and Link Performance in Dynamic LEO Satellite Networks"
     authors:
       - Bin Hu
@@ -75,7 +157,7 @@ publications:
       - Zhi-Li Zhang
     venue: "ACM Workshop on Hot Topics in Mobile Computing (HotMobile)"
     year: 2026
-    note: "To appear"
+
 
   - title: "Joint Multidimensional Features for LoRa Reception in Burst Traffic"
     authors:
@@ -134,131 +216,222 @@ publications:
     venue: "IEEE International Conference on Network Protocols (ICNP)"
     year: 2020
 
-# ======================
-# Research & Experience
-# ======================
 experience:
-  - organization: University of Southern California / University of Minnesota
-    role: Ph.D. Student
-    period: Aug. 2022 – Present
+  - organization:
+      en: University of Southern California / University of Minnesota
+      zh: 南加州大学 / 明尼苏达大学双城分校
+    role:
+      en: Ph.D. Student
+      zh: 博士研究生
+    period:
+      en: Aug. 2022 – Present
+      zh: 2022年8月 – 至今
     details:
-      - "Study network performance and system properties of Starlink LEO satellite networks and 5G networks"
-      - "Focus on cross-layer network design and performance modeling"
-      - "Investigate network dynamics, handovers, and wireless-satellite integration"
+      - en: "Study network performance and system properties of Starlink LEO satellite networks and 5G networks"
+        zh: "研究 Starlink 低轨卫星网络与 5G 网络的性能及系统特性"
+      - en: "Focus on cross-layer network design and performance modeling"
+        zh: "聚焦跨层网络设计与性能建模"
+      - en: "Investigate network dynamics, handovers, and wireless-satellite integration"
+        zh: "研究网络动态、切换机制以及无线与卫星网络融合"
 
-  - organization: Singapore University of Technology and Design (SUTD)
-    role: Research Assistant
-    period: May 2021 – Apr. 2022
+  - organization:
+      en: Singapore University of Technology and Design (SUTD)
+      zh: 新加坡科技设计大学（SUTD）
+    role:
+      en: Research Assistant
+      zh: 研究助理
+    period:
+      en: May 2021 – Apr. 2022
+      zh: 2021年5月 – 2022年4月
     details:
-      - "Worked on Explainable AI (XAI) for Automatic Modulation Classification (AMC)"
-      - "Combined XAI techniques with wireless communication systems"
-      - "Designed interpretable ML models for signal classification"
+      - en: "Worked on Explainable AI (XAI) for Automatic Modulation Classification (AMC)"
+        zh: "开展面向自动调制识别（AMC）的可解释人工智能（XAI）研究"
+      - en: "Combined XAI techniques with wireless communication systems"
+        zh: "将可解释人工智能方法与无线通信系统结合"
+      - en: "Designed interpretable ML models for signal classification"
+        zh: "设计用于信号分类的可解释机器学习模型"
 
-  - organization: Singapore University of Technology and Design (SUTD)
-    role: Research Assistant
-    period: Jul. 2021
+  - organization:
+      en: Singapore University of Technology and Design (SUTD)
+      zh: 新加坡科技设计大学（SUTD）
+    role:
+      en: Research Assistant
+      zh: 研究助理
+    period:
+      en: Jul. 2021
+      zh: 2021年7月
     details:
-      - "Designed and implemented an AI-based software modulator"
-      - "Achieved low-cost and high-flexibility design"
-      - "Co-first author on a paper under submission to IEEE JSAC"
+      - en: "Designed and implemented an AI-based software modulator"
+        zh: "设计并实现基于人工智能的软件调制器"
+      - en: "Achieved low-cost and high-flexibility design"
+        zh: "实现了低成本、高灵活性的设计方案"
+      - en: "Co-first author on a paper under submission to IEEE JSAC"
+        zh: "作为共同第一作者完成一篇投稿至 IEEE JSAC 的论文"
 
-  - organization: Southeast University (SEU)
-    role: Graduate Student Researcher
-    period: Sept. 2019 – Oct. 2020
+  - organization:
+      en: Southeast University (SEU)
+      zh: 东南大学（SEU）
+    role:
+      en: Graduate Student Researcher
+      zh: 研究生科研人员
+    period:
+      en: Sept. 2019 – Oct. 2020
+      zh: 2019年9月 – 2020年10月
     details:
-      - "Studied concurrent communication in LoRa networks"
-      - "Designed and evaluated a multi-dimensional demodulator"
-      - "Published ICNP 2020 paper on collided LoRa transmission decoding"
-      - "Extended work toward a first-author submission to IEEE TMC"
+      - en: "Studied concurrent communication in LoRa networks"
+        zh: "研究 LoRa 网络中的并发通信问题"
+      - en: "Designed and evaluated a multi-dimensional demodulator"
+        zh: "设计并评估多维解调器"
+      - en: "Published ICNP 2020 paper on collided LoRa transmission decoding"
+        zh: "发表关于冲突 LoRa 传输解码的 ICNP 2020 论文"
+      - en: "Extended work toward a first-author submission to IEEE TMC"
+        zh: "在此基础上进一步扩展并以第一作者身份投稿 IEEE TMC"
 
-  - organization: Southeast University (SEU)
-    role: Graduate Student Researcher
-    period: Jun. 2021
+  - organization:
+      en: Southeast University (SEU)
+      zh: 东南大学（SEU）
+    role:
+      en: Graduate Student Researcher
+      zh: 研究生科研人员
+    period:
+      en: Jun. 2021
+      zh: 2021年6月
     details:
-      - "Focused on collision detection in wireless transmission"
-      - "Implemented fine-grained self-correlation detector"
-      - "Published WASA 2021 paper"
+      - en: "Focused on collision detection in wireless transmission"
+        zh: "聚焦无线传输中的冲突检测问题"
+      - en: "Implemented fine-grained self-correlation detector"
+        zh: "实现细粒度自相关检测器"
+      - en: "Published WASA 2021 paper"
+        zh: "发表 WASA 2021 论文"
 
-# ======================
-# Funded Projects
-# ======================
 funded_projects:
-  - sponsor: National Key R&D Program of China
-    title: "Gateway-free cross-technology communication among heterogeneous devices"
+  - sponsor:
+      en: National Key R&D Program of China
+      zh: 国家重点研发计划
+    title:
+      en: "Gateway-free cross-technology communication among heterogeneous devices"
+      zh: "异构设备间无网关跨技术通信"
 
-  - sponsor: National Natural Science Foundation of China (NSFC)
+  - sponsor:
+      en: National Natural Science Foundation of China (NSFC)
+      zh: 国家自然科学基金（NSFC）
     projects:
-      - "Large-scale industrial LoRa network concurrent transmission"
-      - "Energy-efficient LPWAN communication mechanisms"
-      - "Direct connection mechanisms for heterogeneous IoT systems"
+      - en: "Large-scale industrial LoRa network concurrent transmission"
+        zh: "大规模工业 LoRa 网络并发传输"
+      - en: "Energy-efficient LPWAN communication mechanisms"
+        zh: "高能效 LPWAN 通信机制"
+      - en: "Direct connection mechanisms for heterogeneous IoT systems"
+        zh: "异构物联网系统直接连接机制"
 
-# ======================
-# Industry Experience
-# ======================
 industry_experience:
-  - organization: Guangzhou Desheng Artificial Intelligence Technology Co., Ltd.
-    role: Algorithm Engineer (Intern)
-    period: Aug. 2018
+  - organization:
+      en: Guangzhou Desheng Artificial Intelligence Technology Co. Ltd.
+      zh: 广州德晟人工智能科技有限公司
+    role:
+      en: Algorithm Engineer (Intern)
+      zh: 算法工程师（实习）
+    period:
+      en: Aug. 2018
+      zh: 2018年8月
     details:
-      - "Developed camera-based assisted driving systems"
-      - "Implemented driver behavior detection and warning algorithms"
+      - en: "Developed camera-based assisted driving systems"
+        zh: "开发基于摄像头的辅助驾驶系统"
+      - en: "Implemented driver behavior detection and warning algorithms"
+        zh: "实现驾驶员行为检测与预警算法"
 
-# ======================
-# Honors & Awards
-# ======================
 honors_awards:
-  - "Second Prize, Academic Scholarship, Southeast University (2019, 2020)"
-  - "National Second Prize, National College Student Smart Car Competition (2018)"
-  - "Provincial Second Prize, National College Student Smart Car Competition (2018)"
-  - "Merit Student of Southeast University (2017)"
-  - "Outstanding Student, School of Computer Science and Engineering, SEU (2016)"
+  - en: "Second Prize, Academic Scholarship, Southeast University (2019, 2020)"
+    zh: "东南大学学业奖学金二等奖（2019、2020）"
+  - en: "National Second Prize, National College Student Smart Car Competition (2018)"
+    zh: "全国大学生智能汽车竞赛国家二等奖（2018）"
+  - en: "Provincial Second Prize, National College Student Smart Car Competition (2018)"
+    zh: "全国大学生智能汽车竞赛省级二等奖（2018）"
+  - en: "Merit Student of Southeast University (2017)"
+    zh: "东南大学三好学生（2017）"
+  - en: "Outstanding Student, School of Computer Science and Engineering, SEU (2016)"
+    zh: "东南大学计算机科学与工程学院优秀学生（2016）"
 
-# ======================
-# Skills
-# ======================
 skills:
   research:
-    - Signal Processing and Digital Communication
-    - Wireless Communication Systems
-    - Explainable Artificial Intelligence (XAI)
+    - en: Signal Processing and Digital Communication
+      zh: 信号处理与数字通信
+    - en: Wireless Communication Systems
+      zh: 无线通信系统
+    - en: Explainable Artificial Intelligence (XAI)
+      zh: 可解释人工智能（XAI）
 
   tools_platforms:
-    - GNURadio
-    - MATLAB Toolboxes
-    - Software Defined Radios (SDR)
+    - en: GNURadio
+      zh: GNURadio
+    - en: MATLAB Toolboxes
+      zh: MATLAB 工具箱
+    - en: Software Defined Radios (SDR)
+      zh: 软件定义无线电（SDR）
 
   programming:
-    - C
-    - C++
-    - Python
-    - Java
-    - MATLAB
+    - en: C
+      zh: C
+    - en: C++
+      zh: C++
+    - en: Python
+      zh: Python
+    - en: Java
+      zh: Java
+    - en: MATLAB
+      zh: MATLAB
 
-# ======================
-# References
-# ======================
 references:
-  - name: Feng Qian
-    title: Associate Professor
-    affiliation: University of Southern California
+  - name:
+      en: Feng Qian
+      zh: Feng Qian
+    title:
+      en: Associate Professor
+      zh: 副教授
+    affiliation:
+      en: University of Southern California
+      zh: 南加州大学
     email: fengqian@usc.edu
 
-  - name: Tian He
-    title: Professor, ACM/IEEE Fellow
-    affiliation: Southeast University
+  - name:
+      en: Tian He
+      zh: 贺田
+    title:
+      en: Professor, ACM/IEEE Fellow
+      zh: 教授，ACM/IEEE Fellow
+    affiliation:
+      en: Southeast University
+      zh: 东南大学
     email: tianhe@seu.edu.cn
 
-  - name: Shuai Wang
-    title: Professor
-    affiliation: Southeast University
+  - name:
+      en: Shuai Wang
+      zh: Shuai Wang
+    title:
+      en: Professor
+      zh: 教授
+    affiliation:
+      en: Southeast University
+      zh: 东南大学
     email: shuaiwang@seu.edu.cn
 
-  - name: Zhimeng Yin
-    title: Assistant Professor
-    affiliation: City University of Hong Kong
+  - name:
+      en: Zhimeng Yin
+      zh: Zhimeng Yin
+    title:
+      en: Assistant Professor
+      zh: 助理教授
+    affiliation:
+      en: City University of Hong Kong
+      zh: 香港城市大学
     email: zhimeyin@cityu.edu.hk
 
-  - name: Wenchao Jiang
-    title: Assistant Professor
-    affiliation: Singapore University of Technology and Design
+  - name:
+      en: Wenchao Jiang
+      zh: 蒋文超
+    title:
+      en: Assistant Professor
+      zh: 助理教授
+    affiliation:
+      en: Singapore University of Technology and Design
+      zh: 新加坡科技设计大学
     email: wenchao_jiang@sutd.edu.sg

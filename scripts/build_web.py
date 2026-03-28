@@ -4,6 +4,7 @@
 from __future__ import annotations
 from pathlib import Path
 import html
+import json
 import sys
 
 try:
@@ -16,73 +17,85 @@ ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / "content.yml"
 OUT_DIR = ROOT / "site"
 OUT_HTML = OUT_DIR / "index.html"
+STYLE_CSS = ROOT / "style.css"
 
-DEFAULT_CSS = """
-:root { --maxw: 900px; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #fff;
-  color: #111;
+I18N = {
+    "en": {
+        "lang_label": "中文",
+        "page_title_suffix": "Resume",
+        "website_label": "Website",
+        "pdf_label": "PDF",
+        "download_pdf": "Download CV (PDF)",
+        "email_label": "Email",
+        "education": "Education",
+        "publications": "Publications",
+        "experience": "Research & Experience",
+        "funded_projects": "Funded Projects",
+        "industry_experience": "Industry Experience",
+        "honors_awards": "Honors & Awards",
+        "references": "References",
+        "research_area": "Research Area",
+        "advisor": "Advisor",
+    },
+    "zh": {
+        "lang_label": "EN",
+        "page_title_suffix": "简历",
+        "website_label": "主页",
+        "pdf_label": "PDF",
+        "download_pdf": "下载简历（PDF）",
+        "email_label": "邮箱",
+        "education": "教育经历",
+        "publications": "论文发表",
+        "experience": "科研与经历",
+        "funded_projects": "科研项目",
+        "industry_experience": "工业界经历",
+        "honors_awards": "荣誉奖项",
+        "references": "推荐人",
+        "research_area": "研究方向",
+        "advisor": "导师",
+    },
 }
-.container {
-  max-width: var(--maxw);
-  margin: 42px auto;
-  padding: 0 18px;
-}
-.header {
-  text-align: center;
-  margin-bottom: 18px;
-}
-.name { font-size: 40px; font-weight: 700; margin: 0; }
-.meta { margin-top: 10px; font-size: 14px; line-height: 1.7; }
-.meta a { color: inherit; text-decoration: underline; }
-hr { border: 0; border-top: 1px solid #ddd; margin: 18px 0 22px; }
-.section { margin: 20px 0 18px; }
-.section h2 {
-  font-size: 16px;
-  letter-spacing: 0.02em;
-  margin: 0 0 10px;
-  text-transform: uppercase;
-}
-.item { margin: 10px 0 14px; }
-.item .row { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
-.item .title { font-weight: 700; }
-.item .period { white-space: nowrap; font-size: 13px; color: #333; }
-.item .sub { margin-top: 2px; font-size: 14px; }
-.item ul { margin: 6px 0 0 18px; padding: 0; }
-.item li { margin: 3px 0; }
-.small { font-size: 13px; color: #333; }
-"""
 
 def h(s: str) -> str:
-    return html.escape(s, quote=True)
+    return html.escape("" if s is None else str(s), quote=True)
 
-def join_with_sep(items: list[str], sep: str = " | ") -> str:
-    items = [x for x in items if x]
-    return sep.join(items)
+def load_css() -> str:
+    if STYLE_CSS.exists():
+        return STYLE_CSS.read_text(encoding="utf-8")
+    return ""
 
-def render_header(data: dict) -> str:
-    name = h(data.get("name", ""))
-    location = h(data.get("location", ""))
+def pick_lang_value(v, lang: str):
+    if isinstance(v, dict):
+        return v.get(lang, v.get("en", ""))
+    return v
 
-    emails = data.get("email", []) or []
-    phones = data.get("phone", []) or []
-    links = data.get("links", {}) or {}
+def build_header(profile: dict, lang: str) -> str:
+    t = I18N[lang]
 
-    email_html = join_with_sep([f'<a href="mailto:{h(e)}">{h(e)}</a>' for e in emails])
-    phone_html = join_with_sep([h(p) for p in phones])
+    name = h(profile.get("name", ""))
+    location = h(profile.get("location", ""))
+
+    emails = profile.get("email", []) or []
+    phones = profile.get("phone", []) or []
+    links = profile.get("links", {}) or {}
+
+    email_html = " | ".join(
+        f'<a href="mailto:{h(e)}">{h(e)}</a>' for e in emails if e
+    )
+    phone_html = " | ".join(h(p) for p in phones if p)
 
     website = links.get("website", "")
     pdf = links.get("pdf", "")
 
     link_html_parts = []
     if website:
-        link_html_parts.append(f'Website: <a href="{h(website)}">{h(website)}</a>')
+        link_html_parts.append(
+            f'{h(t["website_label"])}: <a href="{h(website)}">{h(website)}</a>'
+        )
     if pdf:
-        link_html_parts.append(f'PDF: <a href="{h(pdf)}">Download CV (PDF)</a>')
-    links_html = "<br/>".join(link_html_parts)
+        link_html_parts.append(
+            f'{h(t["pdf_label"])}: <a id="cv-link" href="{h(pdf)}">{h(t["download_pdf"])}</a>'
+        )
 
     lines = []
     if location:
@@ -91,8 +104,8 @@ def render_header(data: dict) -> str:
         lines.append(email_html)
     if phone_html:
         lines.append(phone_html)
-    if links_html:
-        lines.append(links_html)
+    if link_html_parts:
+        lines.append("<br/>".join(link_html_parts))
 
     meta = "<br/>".join(lines)
 
@@ -103,24 +116,24 @@ def render_header(data: dict) -> str:
     </div>
     """
 
-def render_education(data: dict) -> str:
-    items = data.get("education", []) or []
+def build_education(items: list[dict], lang: str) -> str:
+    t = I18N[lang]
     if not items:
         return ""
 
-    out = ['<div class="section"><h2>Education</h2>']
+    out = [f'<div class="section"><h2>{h(t["education"])}</h2>']
     for ed in items:
-        inst = h(ed.get("institution", ""))
-        loc = h(ed.get("location", ""))
-        degree = h(ed.get("degree", ""))
-        dept = h(ed.get("department", ""))
-        period = h(ed.get("period", ""))
-        #gpa = h(ed.get("gpa", ""))
-        area = h(ed.get("Research Area", ""))
-        advisor = h(ed.get("Advisor", ""))
+        inst = h(pick_lang_value(ed.get("institution", ""), lang))
+        loc = h(pick_lang_value(ed.get("location", ""), lang))
+        degree = h(pick_lang_value(ed.get("degree", ""), lang))
+        dept = h(pick_lang_value(ed.get("department", ""), lang))
+        period = h(pick_lang_value(ed.get("period", ""), lang))
+        area = h(pick_lang_value(ed.get("research_area", ""), lang))
+        advisor = h(pick_lang_value(ed.get("advisor", ""), lang))
 
         out.append('<div class="item">')
         out.append(f'<div class="row"><div class="title">{inst}</div><div class="period">{period}</div></div>')
+
         subparts = []
         if degree:
             subparts.append(f"<div><b>{degree}</b></div>")
@@ -128,44 +141,35 @@ def render_education(data: dict) -> str:
             subparts.append(f"<div>{dept}</div>")
         if loc:
             subparts.append(f'<div class="small">{loc}</div>')
-        #if gpa:
-        #    subparts.append(f'<div class="small">GPA: {gpa}</div>')
-        # if advisor:
-        #     subparts.append(f"<div><b>Advisor:</b> {advisor}</div>")
-
         if subparts:
             out.append(f'<div class="sub">{"".join(subparts)}</div>')
 
         if area:
-            out.append(f"<div><b>Research Area:</b> {area}</div>")
+            out.append(f"<div><b>{h(t['research_area'])}:</b> {area}</div>")
         if advisor:
-            out.append(f"<div><b>Advisor:</b> {advisor}</div>")
-
-        # if project_title:
-        #     out.append("<div class='sub'><b>Project:</b> " + project_title + "</div>")
+            out.append(f"<div><b>{h(t['advisor'])}:</b> {advisor}</div>")
 
         out.append("</div>")
     out.append("</div>")
     return "\n".join(out)
 
-def render_publications(data: dict) -> str:
-    pubs = data.get("publications", []) or []
-    if not pubs:
+def build_publications(items: list[dict], lang: str) -> str:
+    t = I18N[lang]
+    if not items:
         return ""
 
-    out = ['<div class="section"><h2>Publications</h2>']
-    out.append("<ol>")
-    for p in pubs:
-        title = h(p.get("title", ""))
+    out = [f'<div class="section"><h2>{h(t["publications"])}</h2>', "<ol>"]
+    for p in items:
+        title = h(pick_lang_value(p.get("title", ""), lang))
         authors = p.get("authors", []) or []
-        authors_html = ", ".join(h(a) for a in authors)
+        authors_html = ", ".join(h(pick_lang_value(a, lang)) for a in authors)
 
-        venue = h(p.get("venue", ""))
+        venue = h(pick_lang_value(p.get("venue", ""), lang))
         year = p.get("year", "")
-        note = h(p.get("note", "")) if p.get("note", "") else ""
-        vol = h(p.get("volume", "")) if p.get("volume", "") else ""
-        pages = h(p.get("pages", "")) if p.get("pages", "") else ""
-        doi = h(p.get("doi", "")) if p.get("doi", "") else ""
+        note = h(pick_lang_value(p.get("note", ""), lang)) if p.get("note") else ""
+        vol = h(str(p.get("volume", ""))) if p.get("volume") else ""
+        pages = h(str(p.get("pages", ""))) if p.get("pages") else ""
+        doi = h(str(p.get("doi", ""))) if p.get("doi") else ""
 
         tail = []
         if venue:
@@ -180,66 +184,32 @@ def render_publications(data: dict) -> str:
             tail.append(note)
 
         meta = ", ".join(tail)
-        extra = []
-        if doi:
-            extra.append(f'DOI: <a href="https://doi.org/{doi}">{doi}</a>')
 
         out.append("<li>")
         out.append(f"<div><b>{title}</b></div>")
-        out.append(f"<div class='small'>{authors_html}</div>")
+        if authors_html:
+            out.append(f"<div class='small'>{authors_html}</div>")
         if meta:
             out.append(f"<div class='small'><b>{meta}</b></div>")
-        if extra:
-            out.append(f"<div class='small'>{' '.join(extra)}</div>")
+        if doi:
+            out.append(f"<div class='small'>DOI: <a href='https://doi.org/{doi}'>{doi}</a></div>")
         out.append("</li>")
+
     out.append("</ol></div>")
     return "\n".join(out)
 
-def render_experience(data: dict) -> str:
-    exp = data.get("experience", []) or []
-    if not exp:
-        return ""
-
-    out = ['<div class="section"><h2>Research &amp; Experience</h2>']
-    for e in exp:
-        org = h(e.get("organization", ""))
-        role = h(e.get("role", ""))
-        period = h(e.get("period", ""))
-        details = e.get("details", []) or []
-
-        out.append('<div class="item">')
-        out.append(f'<div class="row"><div class="title">{org}</div><div class="period">{period}</div></div>')
-        if role:
-            out.append(f'<div class="sub"><b>{role}</b></div>')
-        if details:
-            out.append("<ul>")
-            for d in details:
-                out.append(f"<li>{h(d)}</li>")
-            out.append("</ul>")
-        out.append("</div>")
-    out.append("</div>")
-    return "\n".join(out)
-
-def render_list_section(title: str, items: list[str]) -> str:
+def build_exp_section(title_key: str, items: list[dict], lang: str) -> str:
+    t = I18N[lang]
     if not items:
         return ""
-    out = [f'<div class="section"><h2>{h(title)}</h2><ul>']
-    for it in items:
-        out.append(f"<li>{h(it)}</li>")
-    out.append("</ul></div>")
-    return "\n".join(out)
 
-def render_industry(data: dict) -> str:
-    inds = data.get("industry_experience", []) or []
-    if not inds:
-        return ""
-
-    out = ['<div class="section"><h2>Industry Experience</h2>']
-    for e in inds:
-        org = h(e.get("organization", ""))
-        role = h(e.get("role", ""))
-        period = h(e.get("period", ""))
+    out = [f'<div class="section"><h2>{h(t[title_key])}</h2>']
+    for e in items:
+        org = h(pick_lang_value(e.get("organization", ""), lang))
+        role = h(pick_lang_value(e.get("role", ""), lang))
+        period = h(pick_lang_value(e.get("period", ""), lang))
         details = e.get("details", []) or []
+
         out.append('<div class="item">')
         out.append(f'<div class="row"><div class="title">{org}</div><div class="period">{period}</div></div>')
         if role:
@@ -247,65 +217,54 @@ def render_industry(data: dict) -> str:
         if details:
             out.append("<ul>")
             for d in details:
-                out.append(f"<li>{h(d)}</li>")
+                out.append(f"<li>{h(pick_lang_value(d, lang))}</li>")
             out.append("</ul>")
         out.append("</div>")
     out.append("</div>")
     return "\n".join(out)
 
-def render_funded_projects(data: dict) -> str:
-    fps = data.get("funded_projects", []) or []
-    if not fps:
+def build_funded_projects(items: list[dict], lang: str) -> str:
+    t = I18N[lang]
+    if not items:
         return ""
 
-    out = ['<div class="section"><h2>Funded Projects</h2><ul>']
-    for fp in fps:
-        sponsor = h(fp.get("sponsor", ""))
-        title = h(fp.get("title", ""))
+    out = [f'<div class="section"><h2>{h(t["funded_projects"])}</h2><ul>']
+    for fp in items:
+        sponsor = h(pick_lang_value(fp.get("sponsor", ""), lang))
+        title = h(pick_lang_value(fp.get("title", ""), lang))
         projects = fp.get("projects", []) or []
         if title:
             out.append(f"<li><b>{sponsor}</b> — {title}</li>")
         else:
-            # sponsor with sub-project list
             out.append(f"<li><b>{sponsor}</b>")
             if projects:
                 out.append("<ul>")
                 for p in projects:
-                    out.append(f"<li>{h(p)}</li>")
+                    out.append(f"<li>{h(pick_lang_value(p, lang))}</li>")
                 out.append("</ul>")
             out.append("</li>")
     out.append("</ul></div>")
     return "\n".join(out)
 
-def render_skills(data: dict) -> str:
-    skills = data.get("skills", {}) or {}
-    if not skills:
+def build_list_section(title_key: str, items: list, lang: str) -> str:
+    t = I18N[lang]
+    if not items:
         return ""
-
-    out = ['<div class="section"><h2>Skills</h2>']
-    for k, arr in skills.items():
-        title = k.replace("_", " ").title()
-        vals = arr or []
-        if not vals:
-            continue
-        out.append(f"<div class='item'><div class='title'>{h(title)}</div>")
-        out.append("<ul>")
-        for v in vals:
-            out.append(f"<li>{h(v)}</li>")
-        out.append("</ul></div>")
-    out.append("</div>")
+    out = [f'<div class="section"><h2>{h(t[title_key])}</h2><ul>']
+    for it in items:
+        out.append(f"<li>{h(pick_lang_value(it, lang))}</li>")
+    out.append("</ul></div>")
     return "\n".join(out)
 
-def render_references(data: dict) -> str:
-    refs = data.get("references", []) or []
-    if not refs:
+def build_references(items: list[dict], lang: str) -> str:
+    t = I18N[lang]
+    if not items:
         return ""
-
-    out = ['<div class="section"><h2>References</h2>']
-    for r in refs:
-        name = h(r.get("name", ""))
-        title = h(r.get("title", ""))
-        aff = h(r.get("affiliation", ""))
+    out = [f'<div class="section"><h2>{h(t["references"])}</h2>']
+    for r in items:
+        name = h(pick_lang_value(r.get("name", ""), lang))
+        title = h(pick_lang_value(r.get("title", ""), lang))
+        aff = h(pick_lang_value(r.get("affiliation", ""), lang))
         email = h(r.get("email", ""))
         out.append("<div class='item'>")
         out.append(f"<div class='title'>{name}</div>")
@@ -313,42 +272,108 @@ def render_references(data: dict) -> str:
         if sub:
             out.append(f"<div class='small'>{sub}</div>")
         if email:
-            out.append(f"<div class='small'>Email: <a href='mailto:{email}'>{email}</a></div>")
+            out.append(f"<div class='small'>{h(t['email_label'])}: <a href='mailto:{email}'>{email}</a></div>")
         out.append("</div>")
     out.append("</div>")
     return "\n".join(out)
 
+def build_page(data: dict, lang: str) -> str:
+    profile = data["profile"][lang]
+
+    body_parts = [
+        build_header(profile, lang),
+        "<hr/>",
+        build_education(data.get("education", []) or [], lang),
+        build_publications(data.get("publications", []) or [], lang),
+        build_exp_section("experience", data.get("experience", []) or [], lang),
+        build_funded_projects(data.get("funded_projects", []) or [], lang),
+        build_exp_section("industry_experience", data.get("industry_experience", []) or [], lang),
+        build_list_section("honors_awards", data.get("honors_awards", []) or [], lang),
+        build_references(data.get("references", []) or [], lang),
+    ]
+    return "\n".join([p for p in body_parts if p])
+
 def main() -> None:
     data = yaml.safe_load(CONTENT.read_text(encoding="utf-8"))
+    css = load_css()
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    body_parts = [
-        render_header(data),
-        "<hr/>",
-        render_education(data),
-        render_publications(data),
-        render_experience(data),
-        render_funded_projects(data),
-        render_industry(data),
-        render_list_section("Honors & Awards", data.get("honors_awards", []) or []),
-        #render_skills(data),
-        render_references(data),
-    ]
-    body = "\n".join([p for p in body_parts if p])
+    pages = {
+        "en": build_page(data, "en"),
+        "zh": build_page(data, "zh"),
+    }
+
+    profile_en = data["profile"]["en"]
+    profile_zh = data["profile"]["zh"]
+
+    page_title_en = f'{profile_en.get("name", "Resume")} | {I18N["en"]["page_title_suffix"]}'
+    page_title_zh = f'{profile_zh.get("name", "简历")} | {I18N["zh"]["page_title_suffix"]}'
 
     html_doc = f"""<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>{h(data.get("name","Resume"))} | Resume</title>
-  <style>{DEFAULT_CSS}</style>
+  <title>{h(page_title_en)}</title>
+  <style>{css}</style>
+  <style>
+    .topbar {{
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 16px;
+    }}
+    .lang-switch {{
+      display: inline-flex;
+      border: 1px solid #ddd;
+      border-radius: 999px;
+      overflow: hidden;
+    }}
+    .lang-switch button {{
+      border: 0;
+      background: white;
+      padding: 8px 14px;
+      cursor: pointer;
+      font-size: 14px;
+    }}
+    .lang-switch button.active {{
+      background: #111;
+      color: #fff;
+    }}
+  </style>
 </head>
 <body>
   <div class="container">
-    {body}
+    <div class="topbar">
+      <div class="lang-switch">
+        <button id="btn-en" onclick="setLanguage('en')">EN</button>
+        <button id="btn-zh" onclick="setLanguage('zh')">中文</button>
+      </div>
+    </div>
+
+    <div id="page-content"></div>
   </div>
+
+  <script>
+    const pages = {json.dumps(pages, ensure_ascii=False)};
+    const titles = {{
+      en: {json.dumps(page_title_en, ensure_ascii=False)},
+      zh: {json.dumps(page_title_zh, ensure_ascii=False)}
+    }};
+
+    function setLanguage(lang) {{
+      document.documentElement.lang = lang;
+      document.title = titles[lang];
+      document.getElementById("page-content").innerHTML = pages[lang];
+
+      document.getElementById("btn-en").classList.toggle("active", lang === "en");
+      document.getElementById("btn-zh").classList.toggle("active", lang === "zh");
+
+      localStorage.setItem("language", lang);
+    }}
+
+    setLanguage(localStorage.getItem("language") || "en");
+  </script>
 </body>
 </html>
 """
