@@ -262,7 +262,7 @@ def latex_doc(data: dict, lang: str) -> str:
             nm = latex_escape(pick_lang_value(r.get("name", ""), lang))
             tt = latex_escape(pick_lang_value(r.get("title", ""), lang))
             aff = latex_escape(pick_lang_value(r.get("affiliation", ""), lang))
-            em = latex_escape(r.get("email", ""))
+            em = r.get("email", "")
             parts.append(r"\textbf{" + nm + r"}\\")
             line = " — ".join([x for x in [tt, aff] if x])
             if line:
