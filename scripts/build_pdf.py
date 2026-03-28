@@ -274,7 +274,7 @@ def latex_doc(data: dict, lang: str) -> str:
                     r"\noindent " + latex_escape(labels["email"]) + ": " + href("mailto:" + em, em) + r"\par"
                 )
 
-            parts.append(r"\addvspace{10pt}")
+            parts.append(r"\addvspace{8pt}")
     body = "\n".join(parts)
 
     if lang == "zh":
