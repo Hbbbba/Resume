@@ -47,11 +47,11 @@ education:
       en: Ming Hsieh Department of Electrical and Computer Engineering
       zh: Ming Hsieh 电子与计算机工程系
     period:
-      en: Aug. 2023 – Present
-      zh: 2023年8月 – 至今
+      en: Aug. 2023 – May 2028 (Expected)
+      zh: 2023年8月 – 2028年5月（预计）
     research_area:
-      en: Computer Networks, Satellite Networks, Video, Machine Learning
-      zh: 计算机网络、卫星网络、视频、机器学习
+      en: Networked Systems, Satellite and Mobile Networks, Real-Time Video, Machine Learning
+      zh: 网络系统、卫星与移动网络、实时视频、机器学习
     advisor:
       en: Prof. Feng Qian
       zh: 钱风教授
@@ -63,8 +63,8 @@ education:
       en: Minneapolis, MN, USA
       zh: 美国明尼苏达州明尼阿波利斯
     degree:
-      en: Ph.D. in Computer Science and Engineering
-      zh: 计算机科学与工程博士
+      en: Doctoral studies in Computer Science and Engineering (transferred to USC with advisor)
+      zh: 计算机科学与工程博士阶段学习（随导师转至南加州大学）
     department:
       en: Department of Computer Science and Engineering
       zh: 计算机科学与工程系
@@ -145,7 +145,11 @@ publications:
       - Ritvik Janamsetty
       - Anlan Zhang
       - Feng Qian
-    venue: "IEEE INFOCOM 2026-IEEE Conference on Computer Communications"
+    venue: "IEEE Conference on Computer Communications (INFOCOM)"
+    note:
+      en: Poster
+      zh: 海报论文
+    doi: "10.1109/INFOCOM59046.2026.11571440"
     year: 2026
     
 
@@ -229,12 +233,26 @@ experience:
       en: Aug. 2022 – Present
       zh: 2022年8月 – 至今
     details:
-      - en: "Study network performance and system properties of Starlink LEO satellite networks and 5G networks"
-        zh: "研究 Starlink 低轨卫星网络与 5G 网络的性能及系统特性"
-      - en: "Focus on cross-layer network design and performance modeling"
-        zh: "聚焦跨层网络设计与性能建模"
-      - en: "Investigate network dynamics, handovers, and wireless-satellite integration"
-        zh: "研究网络动态、切换机制以及无线与卫星网络融合"
+      - en: "Net-JEPA: Contribute to research on a 4M-parameter self-supervised world model that learns reusable network dynamics from telemetry for adaptive bitrate streaming (ABR) and congestion control (CC)."
+        zh: "Net-JEPA：参与约 400 万参数的自监督世界模型研究，从网络遥测学习可复用的网络动态表征，支持自适应码率流媒体（ABR）与拥塞控制（CC）。"
+      - en: "The framework combines latent dynamics prediction with lightweight linear readouts and model predictive control; ABR pretraining uses over 450,000 Puffer streams spanning more than 225,000 viewer sessions."
+        zh: "该框架结合潜在动态预测、轻量线性读出与模型预测控制；ABR 预训练使用超过 45 万条 Puffer 流记录，覆盖逾 22.5 万个观看会话。"
+      - en: "In trace-driven evaluation, the frozen ABR-pretrained model transfers to CC by fitting only the readout on 20 traces, achieving capacity forecast MSLE of 0.84 versus 1.93 for random initialization in an open-loop fluid-queue emulator."
+        zh: "在轨迹驱动评估中，冻结 ABR 预训练模型，仅用 20 条轨迹拟合读出即可迁移至 CC；在开环流体队列仿真器中，容量预测 MSLE 为 0.84，随机初始化基线为 1.93。"
+      - en: "Satellite link prediction (HotMobile 2026): Co-authored a hierarchical framework combining satellite geometry and network telemetry to predict upcoming connections, connection-window performance, and per-second link dynamics."
+        zh: "卫星链路预测（HotMobile 2026）：合作提出融合卫星几何信息与网络遥测的分层框架，预测下一次卫星连接、连接窗口性能及逐秒链路变化。"
+      - en: "Real-system evaluation on Starlink achieved throughput and latency mean absolute errors of 8.37 Mbps and 14.25 ms, respectively, versus 29.54 Mbps and 26.31 ms for a self-similar baseline."
+        zh: "在真实 Starlink 系统上的评估中，吞吐量与时延平均绝对误差分别为 8.37 Mbps 和 14.25 ms，自相似基线分别为 29.54 Mbps 和 26.31 ms。"
+      - en: "Video-call optimization (INFOCOM 2026 Poster): Co-authored a prediction-driven design for adapting video transmission and reconstruction to anticipated satellite-link degradation."
+        zh: "视频通话优化（INFOCOM 2026 海报）：合作提出预测驱动的视频传输与重建设计，提前适应卫星链路性能下降。"
+      - en: "Proposed a multi-satellite extension that prioritizes essential video information on higher-quality paths; preliminary measurements showed higher aggregate throughput and lower packet loss than single-dish configurations."
+        zh: "提出多卫星扩展设计，优先通过高质量路径传输关键视频信息；初步测量显示，相比单终端配置可提高总吞吐量并降低丢包率。"
+      - en: "Developed a multipath system using low-cost Raspberry Pi relay nodes to improve satellite network performance."
+        zh: "开发采用低成本 Raspberry Pi 中继节点的多路径系统，以改善卫星网络性能。"
+      - en: "Developed a WebRTC-based measurement system to record real-time video-call quality for networking research experiments."
+        zh: "开发基于 WebRTC 的测量系统，记录实时视频通话质量，支持网络研究实验。"
+      - en: "Developed an Android application to measure network latency and packet loss for networking research experiments."
+        zh: "开发用于测量网络时延与丢包率的 Android 应用，支持网络研究实验。"
 
   - organization:
       en: Singapore University of Technology and Design (SUTD)
@@ -267,8 +285,6 @@ experience:
         zh: "设计并实现基于人工智能的软件调制器"
       - en: "Achieved low-cost and high-flexibility design"
         zh: "实现了低成本、高灵活性的设计方案"
-      - en: "Co-first author on a paper under submission to IEEE JSAC"
-        zh: "作为共同第一作者完成一篇投稿至 IEEE JSAC 的论文"
 
   - organization:
       en: Southeast University (SEU)
@@ -286,8 +302,6 @@ experience:
         zh: "设计并评估多维解调器"
       - en: "Published ICNP 2020 paper on collided LoRa transmission decoding"
         zh: "发表关于冲突 LoRa 传输解码的 ICNP 2020 论文"
-      - en: "Extended work toward a first-author submission to IEEE TMC"
-        zh: "在此基础上进一步扩展并以第一作者身份投稿 IEEE TMC"
 
   - organization:
       en: Southeast University (SEU)
@@ -355,6 +369,16 @@ honors_awards:
 
 skills:
   research:
+    - en: Self-Supervised Learning and Network World Models
+      zh: 自监督学习与网络世界模型
+    - en: Model Predictive Control for Networked Systems
+      zh: 面向网络系统的模型预测控制
+    - en: Satellite and Mobile Networking
+      zh: 卫星与移动网络
+    - en: Network Measurement and Performance Prediction
+      zh: 网络测量与性能预测
+    - en: Real-Time Video Systems
+      zh: 实时视频系统
     - en: Signal Processing and Digital Communication
       zh: 信号处理与数字通信
     - en: Wireless Communication Systems
@@ -363,6 +387,16 @@ skills:
       zh: 可解释人工智能（XAI）
 
   tools_platforms:
+    - en: Android App Development for Network Measurement
+      zh: 面向网络测量的 Android 应用开发
+    - en: PyTorch
+      zh: PyTorch
+    - en: Linux
+      zh: Linux
+    - en: WebRTC
+      zh: WebRTC
+    - en: Packet Capture and Analysis
+      zh: 数据包捕获与分析
     - en: GNURadio
       zh: GNURadio
     - en: MATLAB Toolboxes
@@ -371,12 +405,10 @@ skills:
       zh: 软件定义无线电（SDR）
 
   programming:
-    - en: C
-      zh: C
-    - en: C++
-      zh: C++
     - en: Python
       zh: Python
+    - en: C/C++
+      zh: C/C++
     - en: Java
       zh: Java
     - en: MATLAB

@@ -36,6 +36,7 @@ I18N = {
         "industry_experience": "Industry Experience",
         "honors_awards": "Honors & Awards",
         "references": "References",
+        "skills": "Technical Skills",
         "research_area": "Research Area",
         "advisor": "Advisor",
     },
@@ -53,6 +54,7 @@ I18N = {
         "industry_experience": "工业界经历",
         "honors_awards": "荣誉奖项",
         "references": "推荐人",
+        "skills": "技术技能",
         "research_area": "研究方向",
         "advisor": "导师",
     },
@@ -301,6 +303,18 @@ def build_references(items: list[dict], lang: str) -> str:
     out.append("</div>")
     return "\n".join(out)
 
+def build_skills(items: dict, lang: str) -> str:
+    categories = {
+        "en": {"programming": "Programming", "research": "Research", "tools_platforms": "Tools & Platforms"},
+        "zh": {"programming": "编程语言", "research": "研究领域", "tools_platforms": "工具与平台"},
+    }[lang]
+    lines = [
+        f"{label}: " + ", ".join(pick_lang_value(x, lang) for x in items.get(key, []))
+        for key, label in categories.items() if items.get(key)
+    ]
+    return build_list_section("skills", lines, lang)
+
+
 def build_page(data: dict, lang: str) -> str:
     profile = data["profile"][lang]
 
@@ -308,8 +322,9 @@ def build_page(data: dict, lang: str) -> str:
         build_header(profile, lang),
         "<hr/>",
         build_education(data.get("education", []) or [], lang),
-        build_publications(data.get("publications", []) or [], lang),
         build_exp_section("experience", data.get("experience", []) or [], lang),
+        build_publications(data.get("publications", []) or [], lang),
+        build_skills(data.get("skills", {}) or {}, lang),
         build_funded_projects(data.get("funded_projects", []) or [], lang),
         build_exp_section("industry_experience", data.get("industry_experience", []) or [], lang),
         build_list_section("honors_awards", data.get("honors_awards", []) or [], lang),

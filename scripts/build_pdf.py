@@ -161,6 +161,21 @@ def latex_doc(data: dict, lang: str) -> str:
             if advisor:
                 parts.append(r"\textbf{" + latex_escape(labels["advisor"]) + r":} " + advisor + r"\\[+10pt]")
 
+    exp = data.get("experience", []) or []
+    if exp:
+        parts.append(section(labels["experience"]))
+        for e in exp:
+            org = latex_escape(pick_lang_value(e.get("organization", ""), lang))
+            role = latex_escape(pick_lang_value(e.get("role", ""), lang))
+            period = latex_escape(pick_lang_value(e.get("period", ""), lang))
+            details = e.get("details", []) or []
+            parts.append(r"\textbf{" + org + r"}" + (r"\hfill " + period if period else "") + r"\\")
+            if role:
+                parts.append(r"\textbf{" + role + r"}\\")
+            if details:
+                parts.append(itemize([pick_lang_value(x, lang) for x in details]))
+            parts.append(r"\vspace{4pt}")
+
     pubs = data.get("publications", []) or []
     if pubs:
         parts.append(section(labels["publications"]))
@@ -203,20 +218,17 @@ def latex_doc(data: dict, lang: str) -> str:
             parts.append(r"\vspace{2pt}")
         parts.append(r"\end{enumerate}")
 
-    exp = data.get("experience", []) or []
-    if exp:
-        parts.append(section(labels["experience"]))
-        for e in exp:
-            org = latex_escape(pick_lang_value(e.get("organization", ""), lang))
-            role = latex_escape(pick_lang_value(e.get("role", ""), lang))
-            period = latex_escape(pick_lang_value(e.get("period", ""), lang))
-            details = e.get("details", []) or []
-            parts.append(r"\textbf{" + org + r"}" + (r"\hfill " + period if period else "") + r"\\")
-            if role:
-                parts.append(r"\textbf{" + role + r"}\\")
-            if details:
-                parts.append(itemize([pick_lang_value(x, lang) for x in details]))
-            parts.append(r"\vspace{4pt}")
+    skills = data.get("skills", {}) or {}
+    if skills:
+        parts.append(section("Technical Skills" if lang == "en" else "技术技能"))
+        categories = {
+            "en": {"programming": "Programming", "research": "Research", "tools_platforms": "Tools & Platforms"},
+            "zh": {"programming": "编程语言", "research": "研究领域", "tools_platforms": "工具与平台"},
+        }[lang]
+        parts.append(itemize([
+            label + ": " + ", ".join(pick_lang_value(x, lang) for x in skills.get(key, []))
+            for key, label in categories.items() if skills.get(key)
+        ]))
 
     funded = data.get("funded_projects", []) or []
     if funded:
