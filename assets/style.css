@@ -324,3 +324,15 @@ a:hover {
     height: 175px;
   }
 }
+.bio {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.bio p {
+  margin: 0 0 12px;
+}
+
+.bio p:last-child {
+  margin-bottom: 0;
+}

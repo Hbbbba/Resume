@@ -122,6 +122,9 @@ def build_header(profile: dict, lang: str) -> str:
 
     meta = "<br/>".join(lines)
 
+    bio = "".join(f"<p>{h(paragraph)}</p>" for paragraph in profile.get("bio", []))
+    bio_html = f'<div class="bio">{bio}</div>' if bio else ""
+
     photo_html = ""
     if photo:
         photo_html = f'''
@@ -139,6 +142,7 @@ def build_header(profile: dict, lang: str) -> str:
         </div>
         {photo_html}
       </div>
+      {bio_html}
     </div>
     """
 

@@ -3,6 +3,9 @@ profile:
     name: Bin Hu
     location: Los Angeles, CA, USA
     photo: "assets/profile.jpg"
+    bio:
+      - "I am a Ph.D. student in Electrical and Computer Engineering at the University of Southern California, advised by Professor Feng Qian, with expected graduation in May 2028. My research focuses on satellite networking, networked systems, and self-supervised world models for network control. I combine network measurement, predictive modeling, and systems development to improve application performance under dynamic network conditions. My recent projects explore satellite-link prediction, real-time video communication, and reusable network representations for adaptive streaming and congestion control."
+      - "I am seeking  research internships in networking and systems and am also interested in systems software engineering opportunities."
 
     email:
       - hubin@usc.edu
@@ -20,6 +23,9 @@ profile:
     name: 胡斌
     location: 美国加州洛杉矶
     photo: "assets/profile.jpg"
+    bio:
+      - "我是南加州大学电子与计算机工程博士研究生，导师为钱风教授，预计于 2028 年 5 月毕业。我的研究聚焦于卫星网络、网络系统以及用于网络控制的自监督世界模型。我结合网络测量、预测建模和系统开发，改善动态网络条件下的应用性能。近期项目涉及卫星链路预测、实时视频通信，以及用于自适应流媒体与拥塞控制的可复用网络表征。"
+      - "我正在寻找网络与系统方向的研究实习，也对系统软件工程机会感兴趣。"
 
     email:
       - hubin@usc.edu
