@@ -178,6 +178,7 @@ def latex_doc(data: dict, lang: str) -> str:
 
     pubs = data.get("publications", []) or []
     if pubs:
+        parts.append(r"\clearpage")
         parts.append(section(labels["publications"]))
         parts.append(r"\begin{enumerate}")
         for p in pubs:
