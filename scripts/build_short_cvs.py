@@ -23,8 +23,8 @@ pdfmetrics.registerFontFamily('Chinese', normal='Chinese', bold='Chinese', itali
 # SWE implementation details also reflect the user's project-specific confirmations.
 SWE_PROJECTS = [
     ('Satellite network measurement, prediction, and optimization', '卫星网络测量、预测与优化',
-     'Collected and synchronized network/satellite data, preprocessed training inputs, and built PyTorch prediction models; contributed to Android measurement clients and a satellite-link prediction framework (HotMobile 2026). Co-first author of a 3,800+ km Starlink and 4G/5G measurement/MPTCP study (CoNEXT Companion 2023).',
-     '采集并同步网络与卫星数据，预处理训练输入并构建 PyTorch 预测模型；参与 Android 测量客户端及卫星链路预测框架研究（HotMobile 2026）。以共同第一作者完成逾 3,800 公里的 Starlink 与 4G/5G 网络测量及 MPTCP 研究（CoNEXT Companion 2023）。'),
+     'Built PyTorch prediction models from synchronized network/satellite data; contributed to Android measurement clients and satellite-link prediction (HotMobile 2026). Co-first author of a 3,800+ km Starlink and 4G/5G measurement/MPTCP study (CoNEXT Companion 2023).',
+     '基于同步的网络与卫星数据构建 PyTorch 预测模型；参与 Android 测量客户端及卫星链路预测研究（HotMobile 2026）。以共同第一作者完成逾 3,800 公里的 Starlink 与 4G/5G 网络测量及 MPTCP 研究（CoNEXT Companion 2023）。'),
     ('Multipath networking', '多路径网络',
      'Built client, server, and proxy components using Raspberry Pi relay nodes; increased throughput by 50-80% and reduced packet-loss rate to about one-tenth of the single-satellite baseline.',
      '使用 Raspberry Pi 中继节点构建客户端、服务端与代理组件；相比单条卫星连接，吞吐量提高 50%-80%，丢包率降至约十分之一。'),
@@ -134,7 +134,7 @@ def build(lang, pages):
         bullets([('Designed and evaluated a multidimensional LoRa demodulator and implemented a fine-grained self-correlation collision detector (ICNP 2020; WASA 2021).',
                   '设计评估 LoRa 多维解调器，实现细粒度自相关冲突检测器（ICNP 2020；WASA 2021）。')[zh]])
     sec('Selected Publications', '代表论文')
-    selected = [1, 3] if pages == 1 else [1, 0, 3, 4, 6]
+    selected = [1, 3, 4] if pages == 1 else [1, 0, 3, 4, 6]
     venues = {0: 'IEEE INFOCOM Poster, 2026', 1: 'ACM HotMobile, 2026',
               3: 'USENIX NSDI, 2024', 4: 'ACM CoNEXT Companion, 2023', 6: 'IEEE ICNP, 2020'}
     for i in selected:
