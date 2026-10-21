@@ -336,3 +336,19 @@ a:hover {
 .bio p:last-child {
   margin-bottom: 0;
 }
+
+.cv-download {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.cv-download select {
+  font: inherit;
+  color: inherit;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 4px 8px;
+}

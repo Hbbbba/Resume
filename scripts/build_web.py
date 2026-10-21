@@ -107,7 +107,15 @@ def build_header(profile: dict, lang: str) -> str:
         )
     if pdf:
         link_html_parts.append(
-            f'{h(t["pdf_label"])}: <a id="cv-link" href="{h(pdf)}">{h(t["download_pdf"])}</a>'
+            '<span class="cv-download">'
+            f'<label for="cv-version">{"CV version" if lang == "en" else "简历版本"}</label> '
+            f'<select id="cv-version" onchange="updateCvLink(this)">'
+            f'<option value="{h(pdf)}">{"Full CV" if lang == "en" else "完整版"}</option>'
+            f'<option value="cv_{lang}_2page.pdf">{"2 pages" if lang == "en" else "两页版"}</option>'
+            f'<option value="cv_{lang}_1page.pdf">{"1 page" if lang == "en" else "一页版"}</option>'
+            '</select> '
+            f'<a id="cv-link" href="{h(pdf)}" download>{h(t["download_pdf"])}</a>'
+            '</span>'
         )
 
     lines = []
@@ -403,6 +411,10 @@ def main() -> None:
       en: {json.dumps(page_title_en, ensure_ascii=False)},
       zh: {json.dumps(page_title_zh, ensure_ascii=False)}
     }};
+
+    function updateCvLink(select) {{
+      document.getElementById("cv-link").href = select.value;
+    }}
 
     function setLanguage(lang) {{
       document.documentElement.lang = lang;
