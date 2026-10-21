@@ -26,17 +26,17 @@ SWE_PROJECTS = [
      'Collected and synchronized network/satellite data, preprocessed training inputs, and built PyTorch prediction models; contributed to Android measurement clients and a satellite-link prediction framework (HotMobile 2026). Co-first author of a 3,800+ km Starlink and 4G/5G measurement/MPTCP study (CoNEXT Companion 2023).',
      '采集并同步网络与卫星数据，预处理训练输入并构建 PyTorch 预测模型；参与 Android 测量客户端及卫星链路预测框架研究（HotMobile 2026）。以共同第一作者完成逾 3,800 公里的 Starlink 与 4G/5G 网络测量及 MPTCP 研究（CoNEXT Companion 2023）。'),
     ('Multipath networking', '多路径网络',
-     'Built client, server, and proxy components using Raspberry Pi relay nodes; increased throughput by 50-80% and reduced packet-loss rate to about one-tenth of a single satellite connection.',
+     'Built client, server, and proxy components using Raspberry Pi relay nodes; increased throughput by 50-80% and reduced packet-loss rate to about one-tenth of the single-satellite baseline.',
      '使用 Raspberry Pi 中继节点构建客户端、服务端与代理组件；相比单条卫星连接，吞吐量提高 50%-80%，丢包率降至约十分之一。'),
     ('WebRTC video-call optimization (INFOCOM 2026 Poster)', 'WebRTC 视频通话优化（INFOCOM 2026 海报）',
-     'Built the WebRTC satellite video-quality measurement system, using Docker, for the poster research; co-authored prediction-driven video transmission and reconstruction to adapt to link degradation.',
+     'Built a WebRTC measurement system for satellite video calls using Docker; contributed to prediction-driven video transmission and reconstruction that adapts to link degradation.',
      '开发使用 Docker 的 WebRTC 卫星视频质量测量系统，支持海报论文研究；合作提出预测驱动的视频传输与重建设计，适应链路性能下降。'),
     ('NIER / low-bitrate neural video conferencing', 'NIER / 低码率神经视频会议',
-     'NIER reconstructs video from sparse key-points and reference images. Contributed to rebuilding its neural model for Android phones.',
-     'NIER 利用稀疏关键点与参考图像重建视频；参与面向 Android 手机的神经模型重新构建工作。'),
+     'Contributed to rebuilding the neural model for Android phones; NIER reconstructs video from sparse keypoints and reference images.',
+     '参与面向 Android 手机的神经模型重建；NIER 利用稀疏关键点与参考图像重建视频。'),
     ('Self-supervised network modeling', '自监督网络建模',
-     'Contribute to Net-JEPA, a 4M-parameter world model for adaptive streaming and congestion control; framework evaluation uses 450,000+ Puffer streams and 20-trace transfer calibration.',
-     '参与 Net-JEPA 研究：约 400 万参数的世界模型，用于自适应流媒体与拥塞控制；框架评估使用逾 45 万条 Puffer 流记录及 20 条迁移校准轨迹。'),
+     'Contribute to Net-JEPA, a 4M-parameter world model for adaptive streaming and congestion control; pretraining uses 450,000+ Puffer streams, with transfer calibrated on 20 traces.',
+     '参与 Net-JEPA 研究：约 400 万参数的世界模型，用于自适应流媒体与拥塞控制；预训练使用逾 45 万条 Puffer 流记录，迁移校准使用 20 条轨迹。'),
 ]
 
 def value(v, lang):
@@ -64,7 +64,10 @@ def build(lang, pages):
     def sec(en, cn):
         story.append(p(cn if zh else en.upper(), section))
     def bullets(items):
-        story.extend(p('- ' + text(s), bullet) for s in items)
+        for s in items:
+            label, separator, detail = text(s).partition(': ' if not zh else '：')
+            formatted = '<b>' + label + separator + '</b>' + detail if separator else label
+            story.append(p('- ' + formatted, bullet))
     def job(index, details=None):
         e = DATA['experience'][index]
         story.append(p(text(e['organization']), heading))
@@ -77,7 +80,7 @@ def build(lang, pages):
                 '网络系统与机器学习 | 南加州大学博士研究生' if zh else
                 'Networked Systems &amp; Machine Learning | Ph.D. Student, USC')
     story.append(p(subtitle, contact))
-    story.append(p('Los Angeles, CA | +1 6124563527 | <link href="mailto:hubin@usc.edu">hubin@usc.edu</link>'
+    story.append(p('Los Angeles, CA | +1 (612) 456-3527 | <link href="mailto:hubin@usc.edu">hubin@usc.edu</link>'
                    ' | <link href="https://Hbbbba.github.io/Resume/">Hbbbba.github.io/Resume</link>', contact))
     sec('Education', '教育经历')
     for index in [0, 2, 4]:
@@ -85,12 +88,10 @@ def build(lang, pages):
         if pages == 2 or index != 4:
             story.append(p(text(e['institution']), heading))
         period = text(e['period'])
-        if pages == 1 and index == 0:
-            period = period.replace('May 2028', '05/2028').replace('2028年5月', '05/2028')
         story.append(p(text(e['degree']) + ' | ' + period))
         if index == 0:
             if pages == 2:
-                story.append(p('导师：钱风教授。预计毕业：05/2028。' if zh else 'Advisor: Prof. Feng Qian. Expected graduation: 05/2028.'))
+                story.append(p('导师：钱风教授' if zh else 'Advisor: Prof. Feng Qian'))
             story.append(p('明尼苏达大学计算机科学与工程博士阶段学习，2022.08-2023.08；随导师转至 USC。' if zh else
                            'Prior doctoral studies: University of Minnesota, CSE, Aug. 2022-Aug. 2023; transferred with advisor.'))
     sec('Technical Skills', '技术技能')
@@ -100,11 +101,11 @@ def build(lang, pages):
                        ('Linux、WebRTC、Android、Raspberry Pi、TCP/UDP 套接字、多路径网络。' if zh else
                         'Linux, WebRTC, Android, Raspberry Pi, TCP/UDP sockets, multipath networking.')))
         story.append(p(('开发与分析工具：' if zh else '<b>Development &amp; analysis:</b> ') +
-                       'Git, Docker, Wireshark, tcpdump, PyTorch, GNURadio.'))
+                       'Git, Docker, Wireshark, tcpdump, PyTorch, GNU Radio.'))
     else:
         story.append(p(('工具与平台：' if zh else '<b>Tools &amp; platforms:</b> ') +
-                   ('PyTorch、Linux、WebRTC、Android、Git、Docker、Wireshark/tcpdump、TCP/UDP 套接字、Raspberry Pi、GNURadio、SDR。' if zh else
-                    'PyTorch, Linux, WebRTC, Android, Git, Docker, Wireshark/tcpdump, TCP/UDP sockets, Raspberry Pi, GNURadio, SDR.')))
+                   ('PyTorch、Linux、WebRTC、Android、Git、Docker、Wireshark/tcpdump、TCP/UDP 套接字、Raspberry Pi、GNU Radio、SDR。' if zh else
+                    'PyTorch, Linux, WebRTC, Android, Git, Docker, Wireshark/tcpdump, TCP/UDP sockets, Raspberry Pi, GNU Radio, SDR.')))
     sec('Engineering & Research Experience' if pages == 1 else 'Research & Engineering Experience',
         '工程与科研经历' if pages == 1 else '科研与工程经历')
     # Keep the research version concise while retaining methods, results, and implementation.
@@ -121,11 +122,11 @@ def build(lang, pages):
         # Preserve the source's separate appointments and dates.
         job(1)
         job(2)
-        job(3)
         job(4)
+        job(3)
     else:
-        story.append(p('SUTD | Research Assistant | May 2021-Apr. 2022; Jul. 2021' if not zh else
-                       '新加坡科技设计大学 | 研究助理 | 2021.05-2022.04；2021.07', heading))
+        story.append(p('SUTD | Research Assistant | May 2021-Apr. 2022' if not zh else
+                       '新加坡科技设计大学 | 研究助理 | 2021.05-2022.04', heading))
         bullets([('Developed interpretable ML models for modulation classification and implemented an AI-based software modulator.',
                   '开发调制分类的可解释机器学习模型，并设计实现基于人工智能的软件调制器。')[zh]])
         story.append(p('Southeast University | Graduate Researcher | Sept. 2019-Oct. 2020; Jun. 2021' if not zh else
@@ -139,6 +140,8 @@ def build(lang, pages):
     for i in selected:
         pub = DATA['publications'][i]
         author = 'Bin Hu et al.' if pub['authors'][0] == 'Bin Hu' else 'Jiazhao Wang et al. (co-author: Bin Hu)'
+        if i == 4:
+            author += ' (co-first author)' if not zh else '（共同第一作者）'
         story.append(p(text(pub['title']) + '. <b>' + venues[i] + '.</b> ' + author))
     sec('Industry Experience', '工业界经历')
     e = DATA['industry_experience'][0]

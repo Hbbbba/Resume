@@ -55,7 +55,11 @@ def itemize(lines: list[str]) -> str:
         return ""
     out = [r"\begin{itemize}"]
     for x in lines:
-        out.append(r"\item " + latex_escape(x))
+        segments = re.split(r"(: |：)", x, maxsplit=1)
+        if len(segments) == 3:
+            out.append(r"\item \textbf{" + latex_escape(segments[0] + segments[1]) + "}" + latex_escape(segments[2]))
+        else:
+            out.append(r"\item " + latex_escape(x))
     out.append(r"\end{itemize}")
     return "\n".join(out) + "\n"
 
@@ -74,7 +78,7 @@ def latex_doc(data: dict, lang: str) -> str:
             "tel": "Tel",
             "education": "Education",
             "publications": "Publications",
-            "experience": "Research & Experience",
+            "experience": "Research & Engineering Experience",
             "funded_projects": "Funded Projects",
             "industry_experience": "Industry Experience",
             "honors_awards": "Honors & Awards",
@@ -90,7 +94,7 @@ def latex_doc(data: dict, lang: str) -> str:
             "tel": "电话",
             "education": "教育经历",
             "publications": "论文发表",
-            "experience": "科研与经历",
+            "experience": "科研与工程经历",
             "funded_projects": "科研项目",
             "industry_experience": "工业界经历",
             "honors_awards": "荣誉奖项",
@@ -110,7 +114,6 @@ def latex_doc(data: dict, lang: str) -> str:
     links = profile.get("links", {}) or {}
 
     website = links.get("website", "")
-    pdf_link = links.get("pdf", "")
 
     email_line = " / ".join([latex_escape(e) for e in emails if e])
     phone_line = " / ".join([latex_escape(p) for p in phones if p])
@@ -119,8 +122,6 @@ def latex_doc(data: dict, lang: str) -> str:
     if website:
         show = re.sub(r"^https?://", "", website)
         link_parts.append(labels["website"] + ": " + href(website, show))
-    if pdf_link:
-        link_parts.append(labels["pdf"] + ": " + href(pdf_link, labels["download"]))
     link_line = " \\quad ".join(link_parts)
 
     header_lines = []
@@ -164,7 +165,7 @@ def latex_doc(data: dict, lang: str) -> str:
     exp = data.get("experience", []) or []
     if exp:
         parts.append(section(labels["experience"]))
-        for e in exp:
+        for e in [exp[i] for i in [0, 1, 2, 4, 3]]:
             org = latex_escape(pick_lang_value(e.get("organization", ""), lang))
             role = latex_escape(pick_lang_value(e.get("role", ""), lang))
             period = latex_escape(pick_lang_value(e.get("period", ""), lang))

@@ -5,7 +5,7 @@ profile:
     photo: "assets/profile.jpg"
     bio:
       - "I am a Ph.D. student in Electrical and Computer Engineering at the University of Southern California, advised by Professor Feng Qian, with expected graduation in May 2028. My research focuses on satellite and cellular/5G networking, networked systems, and self-supervised world models for network control. I combine network measurement, predictive modeling, and systems development to improve application performance under dynamic network conditions. My recent projects explore satellite-link prediction, real-time video communication, and reusable network representations for adaptive streaming and congestion control."
-      - "I am seeking  research internships in networking and systems and am also interested in systems software engineering opportunities."
+      - "I am seeking Summer 2027 research internships in networking and systems and am also interested in systems software engineering opportunities."
 
     email:
       - hubin@usc.edu
@@ -25,7 +25,7 @@ profile:
     photo: "assets/profile.jpg"
     bio:
       - "我是南加州大学电子与计算机工程博士研究生，导师为钱风教授，预计于 2028 年 5 月毕业。我的研究聚焦于卫星与蜂窝/5G 网络、网络系统以及用于网络控制的自监督世界模型。我结合网络测量、预测建模和系统开发，改善动态网络条件下的应用性能。近期项目涉及卫星链路预测、实时视频通信，以及用于自适应流媒体与拥塞控制的可复用网络表征。"
-      - "我正在寻找网络与系统方向的研究实习，也对系统软件工程机会感兴趣。"
+      - "我正在寻找 2027 年夏季网络与系统方向的研究实习，也对系统软件工程机会感兴趣。"
 
     email:
       - hubin@usc.edu
@@ -119,8 +119,8 @@ education:
       en: Pillar of Information Systems Technology and Design
       zh: 信息系统技术与设计方向
     period:
-      en: May 2021 – May 2022
-      zh: 2021年5月 – 2022年5月
+      en: May 2021 – Apr. 2022
+      zh: 2021年5月 – 2022年4月
     research_area:
       en: Automatic Modulation Classification, Explainable AI
       zh: 自动调制识别、可解释人工智能
@@ -207,6 +207,9 @@ publications:
       - Feng Qian
       - Zhi-Li Zhang
     venue: "ACM CoNEXT Companion"
+    note:
+      en: "Co-first author (equal contribution)"
+      zh: "共同第一作者（同等贡献）"
     year: 2023
 
   - title: "Leveraging Fine-Grained Self-Correlation in Detecting Collided LoRa Transmissions"
@@ -239,24 +242,24 @@ experience:
       en: Aug. 2022 – Present
       zh: 2022年8月 – 至今
     details:
-      - en: "Satellite network measurement, prediction, and optimization (HotMobile 2026): Co-authored a hierarchical framework combining satellite geometry and network telemetry to predict upcoming connections, connection-window performance, and per-second link dynamics for proactive satellite-aware optimization."
+      - en: "Satellite network measurement, prediction, and optimization (HotMobile 2026): Contributed to a hierarchical prediction framework combining satellite geometry and network telemetry to predict upcoming connections, connection-window performance, and per-second link dynamics for proactive satellite-aware optimization."
         zh: "卫星网络测量、预测与优化（HotMobile 2026）：合作提出融合卫星几何信息与网络遥测的分层框架，预测下一次连接、连接窗口性能及逐秒链路变化，支持主动式卫星网络优化。"
       - en: "Collected and synchronized network measurements and satellite information, preprocessed training data, and built PyTorch models for network and satellite prediction."
         zh: "采集并同步网络测量数据与卫星信息，预处理训练数据，使用 PyTorch 构建网络与卫星预测模型。"
       - en: "Contributed to Android client development for network experiments measuring latency and packet loss; used Python, C++, and Java across these systems projects."
         zh: "参与测量时延与丢包率的 Android 实验客户端开发；在上述系统项目中使用 Python、C++ 与 Java。"
-      - en: "Real-system evaluation on Starlink achieved throughput and latency mean absolute errors of 8.37 Mbps and 14.25 ms, respectively, versus 29.54 Mbps and 26.31 ms for a self-similar baseline."
-        zh: "在真实 Starlink 系统上的评估中，吞吐量与时延平均绝对误差分别为 8.37 Mbps 和 14.25 ms，自相似基线分别为 29.54 Mbps 和 26.31 ms。"
+      - en: "Real-system evaluation on Starlink achieved throughput and latency prediction mean absolute errors of 8.37 Mbps and 14.25 ms, respectively, versus 29.54 Mbps and 26.31 ms for a self-similar baseline."
+        zh: "在真实 Starlink 系统上的评估中，吞吐量与时延预测的平均绝对误差分别为 8.37 Mbps 和 14.25 ms，自相似基线分别为 29.54 Mbps 和 26.31 ms。"
       - en: "Satellite-cellular integration (CoNEXT Companion 2023, co-first author): Compared two Starlink configurations and three 4G/5G cellular carriers over 3,800+ km (1,239 tests). The study's buffer-tuned MPTCP emulation achieved 30-66% higher throughput than the better single path."
         zh: "卫星与蜂窝网络测量及融合（CoNEXT Companion 2023，共同第一作者）：合作开展两种 Starlink 配置与三家 4G/5G 蜂窝运营商的对比研究，涵盖美国五州、逾 3,800 公里及 1,239 次测试；基于实测轨迹的 MPTCP 仿真在调整系统缓冲区后，相比更优单路径吞吐量提高 30%-66%。"
-      - en: "Multipath networking: Built client, server, and proxy components using Raspberry Pi relay nodes; increased throughput by 50-80% and reduced packet-loss rate to about one-tenth of a single satellite connection."
+      - en: "Multipath networking: Built client, server, and proxy components using Raspberry Pi relay nodes; increased throughput by 50-80% and reduced packet-loss rate to about one-tenth of the single-satellite baseline."
         zh: "多路径网络：使用 Raspberry Pi 中继节点构建客户端、服务端与代理组件；相比单条卫星连接，吞吐量提高 50%-80%，丢包率降至约十分之一。"
       - en: "Proposed a multi-satellite extension that prioritizes essential video information on higher-quality paths; preliminary measurements showed higher aggregate throughput and lower packet loss than single-dish configurations."
         zh: "提出多卫星扩展设计，优先通过高质量路径传输关键视频信息；初步测量显示，相比单终端配置可提高总吞吐量并降低丢包率。"
-      - en: "WebRTC video-call optimization (INFOCOM 2026 Poster): Developed a WebRTC-based satellite video-call quality measurement system, using Docker, to support the poster research. Co-authored a prediction-driven design that adapts video transmission and reconstruction to anticipated satellite-link degradation."
+      - en: "WebRTC video-call optimization (INFOCOM 2026 Poster): Developed a WebRTC-based measurement system for satellite video calls using Docker. Contributed to a prediction-driven design that adapts video transmission and reconstruction to anticipated link degradation."
         zh: "WebRTC 视频通话优化（INFOCOM 2026 海报）：开发基于 WebRTC 的卫星视频通话质量测量系统，在项目中使用 Docker，支持海报论文研究；合作提出预测驱动的传输与重建设计，提前适应卫星链路性能下降。"
-      - en: "NIER - neural-enhanced low-bitrate video conferencing: The system reconstructs video from sparse key-points and reference images. Contributed to rebuilding its neural model for Android phones."
-        zh: "NIER - 神经增强低码率视频会议：该系统利用稀疏关键点与参考图像重建视频；参与面向 Android 手机的神经模型重新构建工作。"
+      - en: "NIER - neural-enhanced low-bitrate video conferencing: Contributed to rebuilding the neural model for Android phones; NIER reconstructs video from sparse keypoints and reference images."
+        zh: "NIER - 神经增强低码率视频会议：参与面向 Android 手机的神经模型重建；NIER 利用稀疏关键点与参考图像重建视频。"
       - en: "Net-JEPA: Contribute to research on a 4M-parameter self-supervised world model that learns reusable network dynamics from telemetry for adaptive bitrate streaming (ABR) and congestion control (CC)."
         zh: "Net-JEPA：参与约 400 万参数的自监督世界模型研究，从网络遥测学习可复用的网络动态表征，支持自适应码率流媒体（ABR）与拥塞控制（CC）。"
       - en: "The framework combines latent dynamics prediction with lightweight linear readouts and model predictive control; ABR pretraining uses over 450,000 Puffer streams spanning more than 225,000 viewer sessions."
@@ -274,7 +277,7 @@ experience:
       en: May 2021 – Apr. 2022
       zh: 2021年5月 – 2022年4月
     details:
-      - en: "Worked on Explainable AI (XAI) for Automatic Modulation Classification (AMC)"
+      - en: "Researched explainable AI (XAI) for automatic modulation classification"
         zh: "开展面向自动调制识别（AMC）的可解释人工智能（XAI）研究"
       - en: "Combined XAI techniques with wireless communication systems"
         zh: "将可解释人工智能方法与无线通信系统结合"
@@ -293,8 +296,6 @@ experience:
     details:
       - en: "Designed and implemented an AI-based software modulator"
         zh: "设计并实现基于人工智能的软件调制器"
-      - en: "Achieved low-cost and high-flexibility design"
-        zh: "实现了低成本、高灵活性的设计方案"
 
   - organization:
       en: Southeast University (SEU)
@@ -407,8 +408,8 @@ skills:
       zh: Wireshark / tcpdump
     - en: TCP/UDP Socket Programming
       zh: TCP/UDP 套接字编程
-    - en: Raspberry Pi Multipath Systems
-      zh: Raspberry Pi 多路径系统
+    - en: Raspberry Pi
+      zh: Raspberry Pi
     - en: Android App Development for Network Measurement
       zh: 面向网络测量的 Android 应用开发
     - en: PyTorch
@@ -419,11 +420,11 @@ skills:
       zh: WebRTC
     - en: Packet Capture and Analysis
       zh: 数据包捕获与分析
-    - en: GNURadio
-      zh: GNURadio
+    - en: GNU Radio
+      zh: GNU Radio
     - en: MATLAB Toolboxes
       zh: MATLAB 工具箱
-    - en: Software Defined Radios (SDR)
+    - en: Software-Defined Radio (SDR)
       zh: 软件定义无线电（SDR）
 
   programming:
@@ -474,8 +475,8 @@ references:
       en: Zhimeng Yin
       zh: 尹知萌
     title:
-      en: Assistant Professor
-      zh: 助理教授
+      en: Associate Professor
+      zh: 副教授
     affiliation:
       en: City University of Hong Kong
       zh: 香港城市大学
