@@ -4,7 +4,7 @@ profile:
     location: Los Angeles, CA, USA
     photo: "assets/profile.jpg"
     bio:
-      - "I am a Ph.D. student in Electrical and Computer Engineering at the University of Southern California, advised by Professor Feng Qian, with expected graduation in May 2028. My research focuses on satellite networking, networked systems, and self-supervised world models for network control. I combine network measurement, predictive modeling, and systems development to improve application performance under dynamic network conditions. My recent projects explore satellite-link prediction, real-time video communication, and reusable network representations for adaptive streaming and congestion control."
+      - "I am a Ph.D. student in Electrical and Computer Engineering at the University of Southern California, advised by Professor Feng Qian, with expected graduation in May 2028. My research focuses on satellite and cellular/5G networking, networked systems, and self-supervised world models for network control. I combine network measurement, predictive modeling, and systems development to improve application performance under dynamic network conditions. My recent projects explore satellite-link prediction, real-time video communication, and reusable network representations for adaptive streaming and congestion control."
       - "I am seeking  research internships in networking and systems and am also interested in systems software engineering opportunities."
 
     email:
@@ -24,7 +24,7 @@ profile:
     location: 美国加州洛杉矶
     photo: "assets/profile.jpg"
     bio:
-      - "我是南加州大学电子与计算机工程博士研究生，导师为钱风教授，预计于 2028 年 5 月毕业。我的研究聚焦于卫星网络、网络系统以及用于网络控制的自监督世界模型。我结合网络测量、预测建模和系统开发，改善动态网络条件下的应用性能。近期项目涉及卫星链路预测、实时视频通信，以及用于自适应流媒体与拥塞控制的可复用网络表征。"
+      - "我是南加州大学电子与计算机工程博士研究生，导师为钱风教授，预计于 2028 年 5 月毕业。我的研究聚焦于卫星与蜂窝/5G 网络、网络系统以及用于网络控制的自监督世界模型。我结合网络测量、预测建模和系统开发，改善动态网络条件下的应用性能。近期项目涉及卫星链路预测、实时视频通信，以及用于自适应流媒体与拥塞控制的可复用网络表征。"
       - "我正在寻找网络与系统方向的研究实习，也对系统软件工程机会感兴趣。"
 
     email:
@@ -56,8 +56,8 @@ education:
       en: Aug. 2023 – May 2028 (Expected)
       zh: 2023年8月 – 2028年5月（预计）
     research_area:
-      en: Networked Systems, Satellite and Mobile Networks, Real-Time Video, Machine Learning
-      zh: 网络系统、卫星与移动网络、实时视频、机器学习
+      en: Networked Systems, Satellite and Cellular/5G Networks, Real-Time Video, Machine Learning
+      zh: 网络系统、卫星与蜂窝/5G 网络、实时视频、机器学习
     advisor:
       en: Prof. Feng Qian
       zh: 钱风教授
@@ -247,8 +247,8 @@ experience:
         zh: "参与测量时延与丢包率的 Android 实验客户端开发；在上述系统项目中使用 Python、C++ 与 Java。"
       - en: "Real-system evaluation on Starlink achieved throughput and latency mean absolute errors of 8.37 Mbps and 14.25 ms, respectively, versus 29.54 Mbps and 26.31 ms for a self-similar baseline."
         zh: "在真实 Starlink 系统上的评估中，吞吐量与时延平均绝对误差分别为 8.37 Mbps 和 14.25 ms，自相似基线分别为 29.54 Mbps 和 26.31 ms。"
-      - en: "Satellite-cellular integration (CoNEXT Companion 2023, co-first author): Compared two Starlink configurations and three cellular carriers over 3,800+ km (1,239 tests). The study's buffer-tuned MPTCP emulation achieved 30-66% higher throughput than the better single path."
-        zh: "卫星与蜂窝网络测量及融合（CoNEXT Companion 2023，共同第一作者）：合作开展两种 Starlink 配置与三家蜂窝运营商的对比研究，涵盖美国五州、逾 3,800 公里及 1,239 次测试；基于实测轨迹的 MPTCP 仿真在调整系统缓冲区后，相比更优单路径吞吐量提高 30%-66%。"
+      - en: "Satellite-cellular integration (CoNEXT Companion 2023, co-first author): Compared two Starlink configurations and three 4G/5G cellular carriers over 3,800+ km (1,239 tests). The study's buffer-tuned MPTCP emulation achieved 30-66% higher throughput than the better single path."
+        zh: "卫星与蜂窝网络测量及融合（CoNEXT Companion 2023，共同第一作者）：合作开展两种 Starlink 配置与三家 4G/5G 蜂窝运营商的对比研究，涵盖美国五州、逾 3,800 公里及 1,239 次测试；基于实测轨迹的 MPTCP 仿真在调整系统缓冲区后，相比更优单路径吞吐量提高 30%-66%。"
       - en: "Multipath networking: Built client, server, and proxy components using Raspberry Pi relay nodes; increased throughput by 50-80% and reduced packet-loss rate to about one-tenth of a single satellite connection."
         zh: "多路径网络：使用 Raspberry Pi 中继节点构建客户端、服务端与代理组件；相比单条卫星连接，吞吐量提高 50%-80%，丢包率降至约十分之一。"
       - en: "Proposed a multi-satellite extension that prioritizes essential video information on higher-quality paths; preliminary measurements showed higher aggregate throughput and lower packet loss than single-dish configurations."
@@ -385,8 +385,8 @@ skills:
       zh: 自监督学习与网络世界模型
     - en: Model Predictive Control for Networked Systems
       zh: 面向网络系统的模型预测控制
-    - en: Satellite and Mobile Networking
-      zh: 卫星与移动网络
+    - en: Satellite and Cellular/5G Network Measurement
+      zh: 卫星与蜂窝/5G 网络测量
     - en: Network Measurement and Performance Prediction
       zh: 网络测量与性能预测
     - en: Real-Time Video Systems
