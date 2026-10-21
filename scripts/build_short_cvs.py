@@ -22,6 +22,9 @@ pdfmetrics.registerFontFamily('Chinese', normal='Chinese', bold='Chinese', itali
 # Short versions deliberately omit references, full funding lists, and older awards.
 # SWE implementation details also reflect the user's project-specific confirmations.
 SWE_PROJECTS = [
+    ('NIER / Android neural video', 'NIER / Android 神经视频',
+     'Contributed to rebuilding NIER\'s neural video-conferencing model for Android phones.',
+     '参与面向 Android 手机的 NIER 神经视频会议模型重新构建工作。'),
     ('WebRTC video measurement', 'WebRTC 视频测量',
      'Developed a WebRTC-based system to record real-time video-call quality over satellite networks; used Docker in the project.',
      '开发基于 WebRTC 的卫星网络实时视频通话质量测量系统，并在项目中使用 Docker。'),
@@ -109,7 +112,7 @@ def build(lang, pages):
         '工程与科研经历' if pages == 1 else '科研与工程经历')
     # Keep the research version concise while retaining methods, results, and implementation.
     research_details = DATA['experience'][0]['details']
-    two_page_details = [research_details[i] for i in [0, 2, 3, 4, 5, 7, 8, 9, 10]]
+    two_page_details = [research_details[i] for i in [0, 2, 3, 4, 5, 7, 8, 9, 10, 11]]
     job(0, [] if pages == 1 else two_page_details)
     if pages == 1:
         for en_label, zh_label, en_detail, zh_detail in SWE_PROJECTS:

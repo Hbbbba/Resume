@@ -261,6 +261,8 @@ experience:
         zh: "采集并同步网络测量数据与卫星信息，预处理训练数据，使用 PyTorch 构建网络与卫星预测模型。"
       - en: "Contributed to Android client development for network experiments measuring latency and packet loss; used Python, C++, and Java across these systems projects."
         zh: "参与测量时延与丢包率的 Android 实验客户端开发；在上述系统项目中使用 Python、C++ 与 Java。"
+      - en: "NIER: Contributed to rebuilding the neural video-conferencing model for Android phones."
+        zh: "NIER：参与面向 Android 手机的神经视频会议模型重新构建工作。"
 
   - organization:
       en: Singapore University of Technology and Design (SUTD)
