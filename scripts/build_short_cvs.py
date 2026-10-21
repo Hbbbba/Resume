@@ -67,8 +67,8 @@ def build(lang, pages):
     story.append(p(text(profile['name']), title))
     story.append(p('网络系统与机器学习 | 南加州大学博士研究生' if zh else
                    'Networked Systems &amp; Machine Learning | Ph.D. Student, USC', contact))
-    story.append(p('Los Angeles, CA | +1 6124563527 | <link href="mailto:hubin@usc.edu">hubin@usc.edu</link>', contact))
-    story.append(p('<link href="https://Hbbbba.github.io/Resume/">Hbbbba.github.io/Resume</link>', contact))
+    story.append(p('Los Angeles, CA | +1 6124563527 | <link href="mailto:hubin@usc.edu">hubin@usc.edu</link>'
+                   ' | <link href="https://Hbbbba.github.io/Resume/">Hbbbba.github.io/Resume</link>', contact))
     sec('Education', '教育经历')
     for index in [0, 2, 4]:
         e = DATA['education'][index]
