@@ -208,14 +208,14 @@ def latex_doc(data: dict, lang: str) -> str:
 
             meta = ", ".join(meta_bits)
 
-            parts.append(r"\item " + r"\textbf{" + title + r"}\\")
+            parts.append(r"\item \begin{minipage}[t]{\linewidth}" + r"\textbf{" + title + r"}\\")
             if author_str:
                 parts.append(author_str + r"\\")
             if meta:
                 parts.append(r"\textbf{" + meta + r"}\\")
             if doi:
                 parts.append(r"DOI: " + href("https://doi.org/" + doi, doi) + r"\\")
-            parts.append(r"\vspace{2pt}")
+            parts.append(r"\vspace{2pt}\end{minipage}")
         parts.append(r"\end{enumerate}")
 
     skills = data.get("skills", {}) or {}
