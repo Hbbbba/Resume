@@ -20,16 +20,23 @@ pdfmetrics.registerFont(TTFont('Chinese', str(chinese_font), subfontIndex=0))
 pdfmetrics.registerFontFamily('Chinese', normal='Chinese', bold='Chinese', italic='Chinese', boldItalic='Chinese')
 
 # Short versions deliberately omit references, full funding lists, and older awards.
-# Do not strengthen contribution verbs beyond the evidence in content.yml.
-COMPACT = [
-    ('Contribute to Net-JEPA, a 4M-parameter self-supervised network world model for adaptive bitrate streaming and congestion control, combining latent prediction, linear readouts, and model predictive control.',
-     '参与 Net-JEPA 研究：约 400 万参数的自监督网络世界模型，结合潜在动态预测、线性读出与模型预测控制，支持自适应码率流媒体与拥塞控制。'),
-    ('Framework evaluation: pretraining on 450,000+ Puffer streams; frozen-model transfer to congestion control with 20 calibration traces achieved capacity forecast MSLE of 0.84 vs. 1.93 for random initialization in fluid-queue emulation.',
-     '框架评估：使用逾 45 万条 Puffer 流记录预训练；冻结模型后用 20 条轨迹校准读出，在流体队列仿真中容量预测 MSLE 为 0.84，随机初始化基线为 1.93。'),
-    ('Co-authored a satellite-link prediction framework combining geometry and telemetry (HotMobile 2026). Real-Starlink evaluation reported throughput/latency MAE of 8.37 Mbps/14.25 ms vs. 29.54 Mbps/26.31 ms for a self-similar baseline.',
-     '合作提出融合卫星几何信息与遥测的链路预测框架（HotMobile 2026）。真实 Starlink 评估中吞吐量/时延 MAE 为 8.37 Mbps/14.25 ms，自相似基线为 29.54 Mbps/26.31 ms。'),
-    ('Co-authored prediction-driven video transmission and reconstruction over LEO links (INFOCOM 2026 Poster); developed WebRTC video-quality measurement, Raspberry Pi multipath relays, and an Android latency/packet-loss measurement app.',
-     '合作提出面向低轨卫星的视频传输与重建设计（INFOCOM 2026 海报）；开发 WebRTC 视频质量测量系统、Raspberry Pi 多路径中继及 Android 时延与丢包测量应用。'),
+# SWE implementation details also reflect the user's project-specific confirmations.
+SWE_PROJECTS = [
+    ('WebRTC video measurement', 'WebRTC 视频测量',
+     'Developed a WebRTC-based system to record real-time video-call quality over satellite networks; used Docker in the project.',
+     '开发基于 WebRTC 的卫星网络实时视频通话质量测量系统，并在项目中使用 Docker。'),
+    ('Multipath networking / Raspberry Pi', '多路径网络 / Raspberry Pi',
+     'Built client, server, and proxy components for a Raspberry Pi multipath system; increased throughput by 50-80% and reduced packet-loss rate to about one-tenth of a single satellite connection.',
+     '构建 Raspberry Pi 多路径系统的客户端、服务端与代理组件；相比单条卫星连接，吞吐量提高 50%-80%，丢包率降至约十分之一。'),
+    ('Android network measurement', 'Android 网络测量',
+     'Contributed to Android client development for network experiments measuring latency and packet loss; used Python, C++, and Java across these systems projects.',
+     '参与测量时延与丢包率的 Android 实验客户端开发；在上述系统项目中使用 Python、C++ 与 Java。'),
+    ('Data pipelines & PyTorch prediction', '数据处理与 PyTorch 预测',
+     'Collected and synchronized network measurements and satellite information, preprocessed training data, and built PyTorch models for network and satellite prediction.',
+     '采集并同步网络测量数据与卫星信息，预处理训练数据，使用 PyTorch 构建网络与卫星预测模型。'),
+    ('Self-supervised network modeling', '自监督网络建模',
+     'Contribute to Net-JEPA, a 4M-parameter world model for adaptive streaming and congestion control; framework evaluation uses 450,000+ Puffer streams and 20-trace transfer calibration.',
+     '参与 Net-JEPA 研究：约 400 万参数的世界模型，用于自适应流媒体与拥塞控制；框架评估使用逾 45 万条 Puffer 流记录及 20 条迁移校准轨迹。'),
 ]
 
 def value(v, lang):
@@ -65,26 +72,49 @@ def build(lang, pages):
         bullets(e['details'] if details is None else details)
     profile = DATA['profile'][lang]
     story.append(p(text(profile['name']), title))
-    story.append(p('网络系统与机器学习 | 南加州大学博士研究生' if zh else
-                   'Networked Systems &amp; Machine Learning | Ph.D. Student, USC', contact))
+    subtitle = ('系统软件与网络 | 南加州大学博士研究生' if zh else
+                'Systems Software &amp; Networking | Ph.D. Student, USC') if pages == 1 else (
+                '网络系统与机器学习 | 南加州大学博士研究生' if zh else
+                'Networked Systems &amp; Machine Learning | Ph.D. Student, USC')
+    story.append(p(subtitle, contact))
     story.append(p('Los Angeles, CA | +1 6124563527 | <link href="mailto:hubin@usc.edu">hubin@usc.edu</link>'
                    ' | <link href="https://Hbbbba.github.io/Resume/">Hbbbba.github.io/Resume</link>', contact))
     sec('Education', '教育经历')
     for index in [0, 2, 4]:
         e = DATA['education'][index]
-        story.append(p(text(e['institution']), heading))
-        story.append(p(text(e['degree']) + ' | ' + text(e['period'])))
+        if pages == 2 or index != 4:
+            story.append(p(text(e['institution']), heading))
+        period = text(e['period'])
+        if pages == 1 and index == 0:
+            period = period.replace('May 2028', '05/2028').replace('2028年5月', '05/2028')
+        story.append(p(text(e['degree']) + ' | ' + period))
         if index == 0:
-            story.append(p('导师：钱风教授。预计毕业：05/2028。' if zh else 'Advisor: Prof. Feng Qian. Expected graduation: 05/2028.'))
+            if pages == 2:
+                story.append(p('导师：钱风教授。预计毕业：05/2028。' if zh else 'Advisor: Prof. Feng Qian. Expected graduation: 05/2028.'))
             story.append(p('明尼苏达大学计算机科学与工程博士阶段学习，2022.08-2023.08；随导师转至 USC。' if zh else
                            'Prior doctoral studies: University of Minnesota, CSE, Aug. 2022-Aug. 2023; transferred with advisor.'))
     sec('Technical Skills', '技术技能')
     story.append(p(('编程：' if zh else '<b>Programming:</b> ') + 'Python, C/C++, Java, MATLAB.'))
-    story.append(p(('工具与平台：' if zh else '<b>Tools &amp; platforms:</b> ') +
-                   ('PyTorch、Linux、WebRTC、Android 网络测量、数据包捕获与分析、GNURadio、SDR。' if zh else
-                    'PyTorch, Linux, WebRTC, Android network measurement, packet capture/analysis, GNURadio, SDR.')))
-    sec('Research & Engineering Experience', '科研与工程经历')
-    job(0, [s[1 if zh else 0] for s in COMPACT] if pages == 1 else DATA['experience'][0]['details'])
+    if pages == 1:
+        story.append(p(('系统与网络：' if zh else '<b>Systems &amp; networking:</b> ') +
+                       ('Linux、WebRTC、Android、Raspberry Pi、TCP/UDP 套接字、多路径网络。' if zh else
+                        'Linux, WebRTC, Android, Raspberry Pi, TCP/UDP sockets, multipath networking.')))
+        story.append(p(('开发与分析工具：' if zh else '<b>Development &amp; analysis:</b> ') +
+                       'Git, Docker, Wireshark, tcpdump, PyTorch, GNURadio.'))
+    else:
+        story.append(p(('工具与平台：' if zh else '<b>Tools &amp; platforms:</b> ') +
+                   ('PyTorch、Linux、WebRTC、Android、Git、Docker、Wireshark/tcpdump、TCP/UDP 套接字、Raspberry Pi、GNURadio、SDR。' if zh else
+                    'PyTorch, Linux, WebRTC, Android, Git, Docker, Wireshark/tcpdump, TCP/UDP sockets, Raspberry Pi, GNURadio, SDR.')))
+    sec('Engineering & Research Experience' if pages == 1 else 'Research & Engineering Experience',
+        '工程与科研经历' if pages == 1 else '科研与工程经历')
+    # Keep the research version concise while retaining methods, results, and implementation.
+    research_details = DATA['experience'][0]['details']
+    two_page_details = [research_details[i] for i in [0, 2, 3, 4, 5, 7, 8, 9, 10]]
+    job(0, [] if pages == 1 else two_page_details)
+    if pages == 1:
+        for en_label, zh_label, en_detail, zh_detail in SWE_PROJECTS:
+            story.append(p('- <b>' + text(zh_label if zh else en_label) + ':</b> ' +
+                           text(zh_detail if zh else en_detail), bullet))
     if pages == 2:
         story.append(PageBreak())
         sec('Research Experience (continued)', '科研经历（续）')
@@ -103,22 +133,22 @@ def build(lang, pages):
         bullets([('Designed and evaluated a multidimensional LoRa demodulator and implemented a fine-grained self-correlation collision detector (ICNP 2020; WASA 2021).',
                   '设计评估 LoRa 多维解调器，实现细粒度自相关冲突检测器（ICNP 2020；WASA 2021）。')[zh]])
     sec('Selected Publications', '代表论文')
-    selected = [1, 0, 3, 6] if pages == 1 else [1, 0, 3, 4, 6]
+    selected = [1, 3] if pages == 1 else [1, 0, 3, 4, 6]
     venues = {0: 'IEEE INFOCOM Poster, 2026', 1: 'ACM HotMobile, 2026',
               3: 'USENIX NSDI, 2024', 4: 'ACM CoNEXT Companion, 2023', 6: 'IEEE ICNP, 2020'}
     for i in selected:
         pub = DATA['publications'][i]
         author = 'Bin Hu et al.' if pub['authors'][0] == 'Bin Hu' else 'Jiazhao Wang et al. (co-author: Bin Hu)'
         story.append(p(text(pub['title']) + '. <b>' + venues[i] + '.</b> ' + author))
+    sec('Industry Experience', '工业界经历')
+    e = DATA['industry_experience'][0]
+    story.append(p(text(e['organization']), heading))
+    story.append(p(text(e['role']) + ' | ' + text(e['period'])))
+    bullets(e['details'])
     if pages == 2:
-        sec('Industry Experience', '工业界经历')
-        e = DATA['industry_experience'][0]
-        story.append(p(text(e['organization']), heading))
-        story.append(p(text(e['role']) + ' | ' + text(e['period'])))
-        bullets(e['details'])
-    sec('Selected Honors', '部分荣誉')
-    awards = DATA['honors_awards']
-    story.append(p('; '.join(text(awards[i]) for i in ([0] if pages == 1 else [0, 1, 2]))))
+        sec('Selected Honors', '部分荣誉')
+        awards = DATA['honors_awards']
+        story.append(p('; '.join(text(awards[i]) for i in [0, 1, 2])))
     out = ROOT / 'site' / f'cv_{lang}_{pages}page.pdf'
     def footer(canvas, doc):
         if pages == 2:
