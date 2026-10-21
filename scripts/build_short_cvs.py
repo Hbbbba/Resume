@@ -22,21 +22,18 @@ pdfmetrics.registerFontFamily('Chinese', normal='Chinese', bold='Chinese', itali
 # Short versions deliberately omit references, full funding lists, and older awards.
 # SWE implementation details also reflect the user's project-specific confirmations.
 SWE_PROJECTS = [
-    ('NIER / Android neural video', 'NIER / Android 神经视频',
-     'Contributed to rebuilding NIER\'s neural video-conferencing model for Android phones.',
-     '参与面向 Android 手机的 NIER 神经视频会议模型重新构建工作。'),
-    ('WebRTC video measurement', 'WebRTC 视频测量',
-     'Developed a WebRTC-based system to record real-time video-call quality over satellite networks; used Docker in the project.',
-     '开发基于 WebRTC 的卫星网络实时视频通话质量测量系统，并在项目中使用 Docker。'),
-    ('Multipath networking / Raspberry Pi', '多路径网络 / Raspberry Pi',
-     'Built client, server, and proxy components for a Raspberry Pi multipath system; increased throughput by 50-80% and reduced packet-loss rate to about one-tenth of a single satellite connection.',
-     '构建 Raspberry Pi 多路径系统的客户端、服务端与代理组件；相比单条卫星连接，吞吐量提高 50%-80%，丢包率降至约十分之一。'),
-    ('Android network measurement', 'Android 网络测量',
-     'Contributed to Android client development for network experiments measuring latency and packet loss; used Python, C++, and Java across these systems projects.',
-     '参与测量时延与丢包率的 Android 实验客户端开发；在上述系统项目中使用 Python、C++ 与 Java。'),
-    ('Data pipelines & PyTorch prediction', '数据处理与 PyTorch 预测',
-     'Collected and synchronized network measurements and satellite information, preprocessed training data, and built PyTorch models for network and satellite prediction.',
-     '采集并同步网络测量数据与卫星信息，预处理训练数据，使用 PyTorch 构建网络与卫星预测模型。'),
+    ('Satellite network measurement, prediction, and optimization', '卫星网络测量、预测与优化',
+     'Collected and synchronized network/satellite data, preprocessed training inputs, and built PyTorch prediction models; contributed to Android measurement clients and a satellite-link prediction framework (HotMobile 2026).',
+     '采集并同步网络与卫星数据，预处理训练输入并构建 PyTorch 预测模型；参与 Android 测量客户端及卫星链路预测框架研究（HotMobile 2026）。'),
+    ('Multipath networking', '多路径网络',
+     'Built client, server, and proxy components using Raspberry Pi relay nodes; increased throughput by 50-80% and reduced packet-loss rate to about one-tenth of a single satellite connection.',
+     '使用 Raspberry Pi 中继节点构建客户端、服务端与代理组件；相比单条卫星连接，吞吐量提高 50%-80%，丢包率降至约十分之一。'),
+    ('WebRTC video-call optimization (INFOCOM 2026 Poster)', 'WebRTC 视频通话优化（INFOCOM 2026 海报）',
+     'Built the WebRTC satellite video-quality measurement system, using Docker, for the poster research; co-authored prediction-driven video transmission and reconstruction to adapt to link degradation.',
+     '开发使用 Docker 的 WebRTC 卫星视频质量测量系统，支持海报论文研究；合作提出预测驱动的视频传输与重建设计，适应链路性能下降。'),
+    ('NIER / low-bitrate neural video conferencing', 'NIER / 低码率神经视频会议',
+     'NIER reconstructs video from sparse key-points and reference images. Contributed to rebuilding its neural model for Android phones.',
+     'NIER 利用稀疏关键点与参考图像重建视频；参与面向 Android 手机的神经模型重新构建工作。'),
     ('Self-supervised network modeling', '自监督网络建模',
      'Contribute to Net-JEPA, a 4M-parameter world model for adaptive streaming and congestion control; framework evaluation uses 450,000+ Puffer streams and 20-trace transfer calibration.',
      '参与 Net-JEPA 研究：约 400 万参数的世界模型，用于自适应流媒体与拥塞控制；框架评估使用逾 45 万条 Puffer 流记录及 20 条迁移校准轨迹。'),
@@ -112,7 +109,7 @@ def build(lang, pages):
         '工程与科研经历' if pages == 1 else '科研与工程经历')
     # Keep the research version concise while retaining methods, results, and implementation.
     research_details = DATA['experience'][0]['details']
-    two_page_details = [research_details[i] for i in [0, 2, 3, 4, 5, 7, 8, 9, 10, 11]]
+    two_page_details = [research_details[i] for i in [0, 1, 2, 3, 4, 6, 7, 8, 10]]
     job(0, [] if pages == 1 else two_page_details)
     if pages == 1:
         for en_label, zh_label, en_detail, zh_detail in SWE_PROJECTS:
